@@ -75,14 +75,14 @@ $dsn = '';
 $hostname = 'localhost';
 $username = 'root';
 $password = '';
-$database = 'rk_aam';
+$database = '';
 $dbdriver = 'mysqli';
 
 $dsn_hris = '';
-$hostname_hris = '192.168.168.17';
-$username_hris = 'admin';
-$password_hris = 'admindimata';
-$database_hris = 'hairisma_mm';
+$hostname_hris = '';
+$username_hris = '';
+$password_hris = '';
+$database_hris = '';
 $dbdriver_hris = 'mysqli';
 
 $active_group = 'default';
