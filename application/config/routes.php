@@ -55,12 +55,14 @@ $route['translate_uri_dashes'] = FALSE;
 
 // ------ Routes Item Checklist -----------
 $route['item'] = 'ItemController/index';
+$route['item/select'] = 'ItemController/select';
 $route['item/store']['POST'] = 'ItemController/store';
 $route['item/edit/(:any)']['GET'] = 'ItemController/edit/$1';
 $route['item/update/(:any)']['POST'] = 'ItemController/update/$1';
 
 // ------ Routes Item Checklist -----------
 $route['category'] = 'CategoryController/index';
+$route['category/select'] = 'CategoryController/select';
 $route['category/store']['POST'] = 'CategoryController/store';
 $route['category/edit/(:any)']['GET'] = 'CategoryController/edit/$1';
 $route['category/update/(:any)']['POST'] = 'CategoryController/update/$1';

@@ -12,7 +12,19 @@ class CategoryController extends CI_Controller {
         $this->load->library('form_validation');
     }
 
-	public function index()
+    public function index()
+    {
+        $data = array(
+            'parent' => 'setting',
+            'child' => 'category'
+        );
+
+        $this->load->view('admin/category', [
+            'data' => $data
+        ]);
+    }
+
+	public function select()
 	{
         $process = $this->data->all();
 
