@@ -3,16 +3,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class ItemController extends CI_Controller {
 
+    private $model = 'Item';
+
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Item');
+        $this->load->model($this->model, 'data');
         $this->load->library('form_validation');
     }
 
 	public function index()
 	{
-        $process = $this->Item->all();
+        $process = $this->data->all();
 
         echo json_encode($process);   
     }
@@ -22,7 +24,7 @@ class ItemController extends CI_Controller {
         $data = $this->input->post();
 
         if($this->validate() == true){
-            $process = $this->Item->insert($data);
+            $process = $this->data->insert($data);
         } else {
             $process = array(
                 'code' => 13,
@@ -35,7 +37,7 @@ class ItemController extends CI_Controller {
 
     public function edit($id)
     {
-        $process = $this->Item->getItemById($id);
+        $process = $this->data->getItemById($id);
 
         echo json_encode($process);  
     }
@@ -45,7 +47,7 @@ class ItemController extends CI_Controller {
         $data = $this->input->post();
 
         if($this->validate() == true){
-            $process = $this->Item->update($data, $id);
+            $process = $this->data->update($data, $id);
         } else {
             $process = array(
                 'code' => 13,

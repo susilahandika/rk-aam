@@ -75,7 +75,7 @@ $dsn = '';
 $hostname = 'localhost';
 $username = 'root';
 $password = '';
-$database = '';
+$database = 'rk_aam';
 $dbdriver = 'mysqli';
 
 $dsn_hris = '';
