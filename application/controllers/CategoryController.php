@@ -28,7 +28,8 @@ class CategoryController extends CI_Controller {
 	{
         $process = $this->data->all();
 
-        echo json_encode($process);   
+        // echo json_encode($process); 
+        $this->_toJson($process);
     }
     
     public function store()
@@ -44,14 +45,14 @@ class CategoryController extends CI_Controller {
             );
         }
 
-        echo json_encode($process); 
+        $this->_toJson($process);
     }
 
     public function edit($id)
     {
         $process = $this->data->getItemById($id);
 
-        echo json_encode($process);  
+        $this->_toJson($process);
     }
 
     public function update($id)
@@ -67,7 +68,7 @@ class CategoryController extends CI_Controller {
             );
         }
 
-        echo json_encode($process);
+        $this->_toJson($process);
     }
 
     public function validate()
@@ -76,5 +77,16 @@ class CategoryController extends CI_Controller {
         $this->form_validation->set_rules('category_name', 'Category Name', 'required');
 
         return $this->form_validation->run();
+    }
+
+    public function _toJson($data)
+    {
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json', 'utf-8')
+            ->set_output(json_encode($data, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
     }
 }

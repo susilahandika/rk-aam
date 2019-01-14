@@ -20,7 +20,7 @@
         </h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li class="active">Dashboard</li>
+          <li class="active">Category</li>
         </ol>
       </section>
 
@@ -28,6 +28,7 @@
       <section class="content">
         <!-- Main panel -->
         <div class="box">
+          <div id="main-msg"></div>
           <div class="box-body">
             <table id="example" class="display table table-bordered table-striped" style="width:100%">
               <thead>
@@ -41,7 +42,7 @@
           </div>
 
           <div class="box-footer">
-            <a class="btn btn-success btn-flat">Add</a>
+            <a class="btn btn-success btn-flat" id="btn-add">Add</a>
           </div>
         </div>
         <!-- /.Main panel -->
@@ -50,6 +51,40 @@
     </div>
     <!-- /.content-wrapper -->
 
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" id="modal-title">Modal Header</h4>
+            <input type="hidden" name="" id="process">
+          </div>
+          <div class="modal-body">
+            <div id="modal-msg"></div>
+            <table class="table table-hover table-responsive">
+              <tr>
+                <td width="25%">Category ID</td>
+                <td><input type="text" name="id" id="id" class="form-control input-sm"></td>
+              </tr>
+
+              <tr>
+                <td width="25%">Category Name</td>
+                <td><input type="text" name="category_name" id="category_name" class="form-control input-sm"></td>
+              </tr>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success btn-flat" id="btn-save">Save</button>
+            <!-- <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button> -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <?php $this->load->view('admin/_partials/footer') ?>
 
   </div>
@@ -57,21 +92,6 @@
 
   <?php $this->load->view('admin/_partials/js') ?>
 
-  <script>
-    $(document).ready(function () {
-      $('#example').DataTable( {
-          "ajax": "http://localhost/rk-aam/category/select",
-          "sAjaxDataProp": "",
-          "columns": [
-              { "data": "id" },
-              { "data": "category_name" },
-              { 
-                "data": "null",
-                "defaultContent": '<a href="" class="btn btn-warning btn-flat btn-sm">Edit</a> <a href="" class="btn btn-danger btn-flat btn-sm">Delete</a>' 
-              },
-          ]
-      } );
-    });
-  </script>
+  <script src="<?php echo base_url();?>/assets/system/js/category.js"></script>
 </body>
 </html>

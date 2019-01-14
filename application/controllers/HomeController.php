@@ -5,6 +5,13 @@ class HomeController extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('admin/category');
+		$data = array(
+			'parent' => 'home',
+			'child' => ''
+		);
+		
+		$this->load->view('admin/home', [
+			'data' => $data
+		]);
 	}
 }

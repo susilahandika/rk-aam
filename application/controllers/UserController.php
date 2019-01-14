@@ -11,10 +11,15 @@ class UserController extends CI_Controller {
 
 	public function index()
 	{
-        $users = $this->User->getUsers();
+        $this->load->view('admin/login');
+    }
+    
+    public function auth()
+    {
+        // $users = $this->User->getUsers();
         
-        echo "<pre>";
-        print_r($users);
-        echo "</pre>";
-	}
+        // echo "<pre>";
+        // print_r($users);
+        // echo "</pre>";
+    }
 }
