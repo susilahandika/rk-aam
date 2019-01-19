@@ -12,11 +12,23 @@ class ItemController extends CI_Controller {
         $this->load->library('form_validation');
     }
 
-	public function index()
+    public function index()
+    {
+        $data = array(
+            'parent' => 'setting',
+            'child' => 'item'
+        );
+
+        $this->load->view('admin/item', [
+            'data' => $data
+        ]);
+    }
+
+	public function select()
 	{
         $process = $this->data->all();
 
-        echo json_encode($process);   
+        $this->_toJson($process);   
     }
     
     public function store()
@@ -32,14 +44,14 @@ class ItemController extends CI_Controller {
             );
         }
 
-        echo json_encode($process); 
+        $this->_toJson($process);  
     }
 
     public function edit($id)
     {
         $process = $this->data->getItemById($id);
 
-        echo json_encode($process);  
+        $this->_toJson($process);  
     }
 
     public function update($id)
@@ -55,7 +67,7 @@ class ItemController extends CI_Controller {
             );
         }
 
-        echo json_encode($process);
+        $this->_toJson($process);  
     }
 
     public function validate()
@@ -67,5 +79,16 @@ class ItemController extends CI_Controller {
         $this->form_validation->set_rules('order', 'Order', 'required');
 
         return $this->form_validation->run();
+    }
+
+    public function _toJson($data)
+    {
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json', 'utf-8')
+            ->set_output(json_encode($data, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
     }
 }

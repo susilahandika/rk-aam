@@ -1,19 +1,45 @@
 $(document).ready(function () {
-     /* Get department */
-     getDepartment();
+    
+    /* Get category */
+    getCategory('category_id');
+
+    /* Get department */
+    getDepartment('dept_id');
+    getDepartment('filter_dept');
+
+    /* Get region */
+    getRegion('filter_region');
+    getRegion('region_id');
 
     var table = $('#example').DataTable({
-        "ajax": base_url() + "category/select",
+        "ajax": base_url() + "item/select",
         "sAjaxDataProp": "",
         "columns": [
             { "data": "id" },
+            { "data": "category_id" },
             { "data": "category_name" },
             { "data": "dept_id" },
+            { "data": "region_id" },
+            { "data": "item_name" },
+            { "data": "order" },
+            { "data": "status" },
             {
                 "data": "null",
                 "defaultContent": '<a href="" class="btn btn-warning btn-flat btn-sm" id="btn-edit">Edit</a>'
             },
-        ]
+        ],
+        "columnDefs": [
+            {
+                "targets": [1,6],
+                "visible": false,
+                "searchable": false
+            },
+        ],
+        "createdRow": function (row, data, dataIndex) { //add class status(css) jika status == I
+            if (data.status == "I") {
+                $(row).addClass('status');
+            }
+        }
     });
 
     /* Button edit */
@@ -22,9 +48,13 @@ $(document).ready(function () {
         var data_table = table.row($(this).parents('tr')).data();
 
         $('#id').val(data_table.id);
-        $('#category_name').val(data_table.category_name);
+        $('#category_id').val(data_table.category_id);
+        $('#item_name').val(data_table.item_name);
         $('#dept_id').val(data_table.dept_id);
-        
+        $('#region_id').val(data_table.region_id);
+        $('#status').val(data_table.status);
+        $('#order').val(data_table.order);
+
         $('#process').val('edit');
         $('#modal-title').html('Update Data');
         $('#modal_msg').hide();
@@ -40,9 +70,9 @@ $(document).ready(function () {
 
         $('#process').val('insert');
         $('#modal-title').html('Insert Data');
-        $('#modal_msg').hide();
-        $('#id').val('');
-        $('#category_name').val('');
+
+        /* Clear form insert data */
+        clearForm(); 
 
         $("#myModal").modal("toggle");
     });
@@ -55,14 +85,18 @@ $(document).ready(function () {
 
         $data = {
             'id': $('#id').val(),
-            'category_name': $('#category_name').val(),
+            'item_name': $('#item_name').val(),
             'dept_id': $('#dept_id').val(),
+            'category_id': $('#category_id').val(),
+            'region_id': $('#region_id').val(),
+            'order': $('#order').val(),
+            'status': $('#status').val(),
         };
 
         if ($('#process').val() == 'insert') {
-            _url = base_url() + "category/store";
+            _url = base_url() + "item/store ";
         } else if ($('#process').val() == 'edit') {
-            _url = base_url() + "category/update/" + $data.id;
+            _url = base_url() + "item/update/" + $data.id;
         }
 
         $.ajax({
@@ -84,6 +118,7 @@ $(document).ready(function () {
                     }
 
                     $("#modal-msg").html('<div class="alert alert-danger">' + msg + '</div>');
+                    $("#modal-msg").show();
                 }
                 else {
                     $("#myModal").modal("toggle");
@@ -99,4 +134,21 @@ $(document).ready(function () {
         });
     });
     /* ./Button save */
+
+    /* Button filter */
+    $('.filter').on('keyup change', function () {
+        // table.column(3).search(this.value).draw();
+        table.search('');
+        table.column($(this).data('columnIndex')).search(this.value).draw();
+    });
+    /* /.Button filter */
+
+    /* Clear Form */
+    function clearForm() {
+    	$('#id').val('');
+    	$('#category_id').val('');
+    	$('#item_name').val('');
+    	$('#status').val('');
+    	$('#order').val('');
+    }
 });

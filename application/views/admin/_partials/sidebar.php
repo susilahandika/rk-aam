@@ -5,7 +5,7 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
-      <li class="<?php echo ($parent == 'home') ? 'active' : ''; ?>"><a href="<?php echo base_url(); ?>"><i class="fa fa-home"></i> <span>Home</span></a></li>
+      <li class="<?php echo ($parent == 'home') ? 'active' : ''; ?>"><a href="<?php echo base_url(); ?>home"><i class="fa fa-home"></i> <span>Home</span></a></li>
       <li class="<?php echo ($parent == 'setting') ? 'active' : ''; ?> treeview">
         <a href="#">
           <i class="fa fa-cogs"></i> <span>Setting</span>
@@ -15,7 +15,7 @@
         </a>
         <ul class="treeview-menu">
           <li class="<?php echo ($child == 'category') ? 'active' : ''; ?>"><a href="category"><i class="fa fa-circle-o"></i> Category</a></li>
-          <li class="<?php echo ($child == 'item') ? 'active' : ''; ?>"><a href="#"><i class="fa fa-circle-o"></i> Item Checklist</a></li>
+          <li class="<?php echo ($child == 'item') ? 'active' : ''; ?>"><a href="item"><i class="fa fa-circle-o"></i> Item Checklist</a></li>
         </ul>
       </li>
       <li class="<?php echo ($parent == 'schedule') ? 'active' : ''; ?>"><a href="#"><i class="fa fa-calendar"></i> <span>Schedule</span></a></li>

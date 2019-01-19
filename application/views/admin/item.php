@@ -2,6 +2,29 @@
 <html>
 <head>
   <?php $this->load->view('admin/_partials/head') ?>
+
+  <style>
+    .status{
+      background-color: #bfbfbf;
+    }
+
+    fieldset{
+        border: 1px groove #ddd !important;
+        padding: 0 1.4em 1.4em 1.4em !important;
+        margin: 0 0 1.5em 0 !important;
+        -webkit-box-shadow:  0px 0px 0px 0px #000;
+                box-shadow:  0px 0px 0px 0px #000;
+    }
+
+    legend{
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        text-align: left !important;
+        width:auto;
+        padding:0 10px;
+        border-bottom:none;
+    }
+  </style>
 </head>
 
 <body class="hold-transition skin-green sidebar-mini">
@@ -16,11 +39,11 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          Category
+          Item Checklist
         </h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li class="active">Category</li>
+          <li class="active">Item Checklist</li>
         </ol>
       </section>
 
@@ -30,13 +53,26 @@
         <div class="box">
           <div id="main-msg"></div>
           <div class="box-body">
-            <table id="example" class="display table table-bordered table-striped" style="width:100%">
+            <div>
+              <fieldset>
+                <legend>Filter:</legend>
+
+                <select name="" id="filter_region" class="form-control input-sm filter" data-column-index='4'></select>
+                <select name="" id="filter_dept" class="form-control input-sm filter" data-column-index='3'></select>
+              </fieldset>
+            </div> <hr>
+            <table id="example" class="display table table-bordered" style="width:100%">
               <thead>
                 <tr>
-                    <th>Category ID</th>
-                    <th>Category Name</th>
-                    <th>Dept ID</th>
-                    <th>Process</th>
+                  <th width="10%">Item ID</th>
+                  <th width="5%">Category ID</th>
+                  <th width="20%">Category Name</th>
+                  <th width="10%">Dept ID</th>
+                  <th width="10%">Region ID</th>
+                  <th width="30%">Item Name</th>
+                  <th width="5%">Order</th>
+                  <th width="5%">Status</th>
+                  <th width="10%">Process</th>
                 </tr>
               </thead>
             </table>
@@ -67,13 +103,20 @@
             <div id="modal-msg"></div>
             <table class="table table-hover table-responsive">
               <tr>
-                <td width="25%">Category ID</td>
+                <td width="25%">Item ID</td>
                 <td><input type="text" name="id" id="id" class="form-control input-sm"></td>
               </tr>
 
               <tr>
-                <td width="25%">Category Name</td>
-                <td><input type="text" name="category_name" id="category_name" class="form-control input-sm"></td>
+                <td width="25%">Item Name</td>
+                <td><input type="text" name="item_name" id="item_name" class="form-control input-sm"></td>
+              </tr>
+
+              <tr>
+                <td width="25%">Region</td>
+                <td>
+                  <select name="region_id" id="region_id" class="form-control input-sm"></select>
+                </td>
               </tr>
 
               <tr>
@@ -81,6 +124,23 @@
                 <td>
                   <select name="dept_id" id="dept_id" class="form-control input-sm"></select>
                 </td>
+              </tr>
+
+              <tr>
+                <td width="25%">Category</td>
+                <td>
+                  <select name="category_id" id="category_id" class="form-control input-sm"></select>
+                </td>
+              </tr>
+
+              <tr>
+                <td width="25%">Order</td>
+                <td><input type="text" name="order" id="order" class="form-control input-sm"></td>
+              </tr>
+
+              <tr>
+                <td width="25%">Status</td>
+                <td><input type="text" name="status" id="status" class="form-control input-sm"></td>
               </tr>
             </table>
           </div>
@@ -100,7 +160,7 @@
 
   <?php $this->load->view('admin/_partials/js') ?>
 
-  <script src="<?php echo base_url();?>/assets/system/js/category.js"></script>
+  <script src="<?php echo base_url();?>/assets/system/js/item.js"></script>
   <script src="<?php echo base_url();?>/assets/system/js/function.js"></script>
   <script src="<?php echo base_url();?>/assets/system/js/link.js"></script>
 </body>

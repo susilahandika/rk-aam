@@ -75,14 +75,14 @@ $dsn = '';
 $hostname = 'localhost';
 $username = 'root';
 $password = '';
-$database = 'rk_aam';
+$database = 'mm_checklist';
 $dbdriver = 'mysqli';
 
 $dsn_hris = '';
-$hostname_hris = '';
-$username_hris = '';
-$password_hris = '';
-$database_hris = '';
+$hostname_hris = '192.168.168.17';
+$username_hris = 'itmm';
+$password_hris = 't34m1tmm';
+$database_hris = 'hairisma_mm';
 $dbdriver_hris = 'mysqli';
 
 $active_group = 'default';

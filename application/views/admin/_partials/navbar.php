@@ -5,7 +5,7 @@
 		<!-- mini logo for sidebar mini 50x50 pixels -->
 		<span class="logo-mini"><b>M</b>M</span>
 		<!-- logo for regular state and mobile devices -->
-		<span class="logo-lg"><b>RK</b> AAM</span>
+		<span class="logo-lg"><b>MM</b> Checklist</span>
 	</a>
 
 	<!-- Header Navbar: style can be found in header.less -->
@@ -175,7 +175,7 @@
 								<a href="#" class="btn btn-default btn-flat">Profile</a>
 							</div>
 							<div class="pull-right">
-								<a href="#" class="btn btn-default btn-flat">Sign out</a>
+								<a href="<?php echo base_url(); ?>" class="btn btn-default btn-flat">Sign out</a>
 							</div>
 						</li>
 					</ul>

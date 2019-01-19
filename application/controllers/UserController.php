@@ -16,10 +16,41 @@ class UserController extends CI_Controller {
     
     public function auth()
     {
-        // $users = $this->User->getUsers();
+        $userid = $this->input->post('userid');
+        $password = $this->input->post('password');
+
+        $users = $this->User->getUsers($userid, $password);
         
-        // echo "<pre>";
-        // print_r($users);
-        // echo "</pre>";
+        if (!empty($users)) {
+            redirect('home');
+        }else{
+            $this->session->set_flashdata('error_login', '<strong>Login failed!</strong> Pleace check your user ID and password');
+            redirect(base_url());
+        }
+    }
+
+    public function listDept()
+    {   
+        $process = $this->User->getDept();
+
+        $this->_toJson($process);   
+    }
+
+    public function listRegion()
+    {   
+        $process = $this->User->getRegion();
+
+        $this->_toJson($process);   
+    }
+
+    public function _toJson($data)
+    {
+        $this->output
+            ->set_status_header(200)
+            ->set_content_type('application/json', 'utf-8')
+            ->set_output(json_encode($data, JSON_PRETTY_PRINT))
+            ->_display();
+
+        exit;
     }
 }

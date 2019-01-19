@@ -53,8 +53,10 @@ $route['default_controller'] = 'UserController';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-// Routes Login
-$route['login/auth'] = 'UserController/auth';
+// Routes User
+$route['login/auth']['POST'] = 'UserController/auth';
+$route['user/dept'] = 'UserController/listDept';
+$route['user/region'] = 'UserController/listRegion';
 
 // Routes Home
 $route['home'] = 'HomeController/index';
