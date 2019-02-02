@@ -6,9 +6,10 @@ class User extends CI_Model {
     public function getUsers($user, $password)
     {
         $this->db2 = $this->load->database('hris', TRUE);
+        $this->db3 = $this->load->database('mm', TRUE);
 
         $data = $this->db2
-                ->select('login_id, password')
+                ->select('login_id, password, full_name')
                 ->where('login_id', $user)
                 ->where('password', $password)
                 ->get('hr_app_user')->result();
@@ -39,6 +40,21 @@ class User extends CI_Model {
         
         $output = $this->db
                 ->get('region')->result();
+
+        $db_error = $this->db->error();
+
+        if(!empty($db_error) and $db_error['code'] !=0 ){
+            return $db_error;
+        } else{
+            return $output;
+        }
+    }
+
+    public function getStore()
+    {
+        $this->db = $this->load->database('mm', TRUE);
+        $output = $this->db
+                ->get('store')->result();
 
         $db_error = $this->db->error();
 

@@ -85,6 +85,13 @@ $password_hris = 't34m1tmm';
 $database_hris = 'hairisma_mm';
 $dbdriver_hris = 'mysqli';
 
+$dsn_mm = '';
+$hostname_mm = 'localhost';
+$username_mm = 'root';
+$password_mm = '';
+$database_mm = 'minimart';
+$dbdriver_mm = 'mysqli';
+
 $active_group = 'default';
 $query_builder = TRUE;
 
@@ -117,6 +124,28 @@ $db['hris'] = array(
 	'password' => $password_hris,
 	'database' => $database_hris,
 	'dbdriver' => $dbdriver_hris,
+	'dbprefix' => '',
+	'pconnect' => FALSE,
+	'db_debug' => FALSE,
+	'cache_on' => FALSE,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => FALSE,
+	'compress' => FALSE,
+	'stricton' => FALSE,
+	'failover' => array(),
+	'save_queries' => TRUE
+);
+
+$db['mm'] = array(
+	'dsn'	=> $dsn_mm,
+	'hostname' => $hostname_mm,
+	'username' => $username_mm,
+	'password' => $password_mm,
+	'database' => $database_mm,
+	'dbdriver' => $dbdriver_mm,
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => FALSE,

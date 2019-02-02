@@ -50,3 +50,20 @@ function getRegion(id) {
 		}
 	});
 }
+
+function getStore(id) {
+	$.ajax({
+		type: "GET",
+		url: base_url() + 'user/store',
+		dataType: "json",
+		cache: false,
+		success: function (response) {
+			$('#' + id).html('');
+			$('#' + id).append('<option value="">Store</option>');
+			$.each(response, function (i, value) {
+				//  $('#dept_id').html('<option>asd</option>');
+				$('#' + id).append('<option value="' + value.id + '">' + value.store_name + '</option>');
+			});
+		}
+	});
+}

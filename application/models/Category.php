@@ -19,6 +19,25 @@ class Category extends CI_Model {
         }
     }
 
+    public function getCategoryByRegion($region_id)
+    {
+        $this->db->select('a.id, a.category_name');
+        $this->db->from($this->table . ' as a');
+        $this->db->where('a.region_id', $region_id);
+        $this->db->where('b.region_id', $region_id);
+        $this->db->join('item_checklist as b', 'a.id = b.category_id');
+        $this->db->group_by('a.id, a.category_name');
+        $output = $this->db->get()->result();
+
+        $db_error = $this->db->error();
+
+        if(!empty($db_error) and $db_error['code'] !=0 ){
+            return $db_error;
+        } else{
+            return $output;
+        }
+    }
+
     public function getItemById($id)
     {
         $this->db->where($this->primary_key, $id);

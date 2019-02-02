@@ -57,6 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['login/auth']['POST'] = 'UserController/auth';
 $route['user/dept'] = 'UserController/listDept';
 $route['user/region'] = 'UserController/listRegion';
+$route['user/store'] = 'UserController/listStore';
 
 // Routes Home
 $route['home'] = 'HomeController/index';
@@ -68,9 +69,22 @@ $route['item/store']['POST'] = 'ItemController/store';
 $route['item/edit/(:any)']['GET'] = 'ItemController/edit/$1';
 $route['item/update/(:any)']['POST'] = 'ItemController/update/$1';
 
-// ------ Routes Item Checklist -----------
+// ------ Routes Category Checklist -----------
 $route['category'] = 'CategoryController/index';
 $route['category/select'] = 'CategoryController/select';
+$route['category/selectByRegion/(:any)']['GET'] = 'CategoryController/selectByRegion/$1';
 $route['category/store']['POST'] = 'CategoryController/store';
 $route['category/edit/(:any)']['GET'] = 'CategoryController/edit/$1';
 $route['category/update/(:any)']['POST'] = 'CategoryController/update/$1';
+
+/* ----- Routes Schedule ----- */
+$route['schedule'] = 'ScheduleController/index';
+$route['schedule/create'] = 'ScheduleController/create';
+$route['schedule/show']['POST'] = 'ScheduleController/showSchedule';
+$route['schedule/store']['POST'] = 'ScheduleController/store';
+$route['schedule/cekstorechecklist']['POST'] = 'ScheduleController/cekStoreChecklist';
+
+/* ----- Routes Checklist ----- */
+$route['checklist'] = 'ChecklistController/index';
+$route['checklist/(:any)']['GET'] = 'ChecklistController/checklistCategory/$1';
+$route['checklist/store']['POST'] = 'ChecklistController/store';

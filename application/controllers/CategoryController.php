@@ -31,6 +31,14 @@ class CategoryController extends CI_Controller {
         // echo json_encode($process); 
         $this->_toJson($process);
     }
+
+    public function selectByRegion($region_id)
+    {
+        $process = $this->data->getCategoryByRegion($region_id);
+
+        // echo json_encode($process); 
+        $this->_toJson($process);
+    }
     
     public function store()
     {

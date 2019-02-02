@@ -22,6 +22,13 @@ class UserController extends CI_Controller {
         $users = $this->User->getUsers($userid, $password);
         
         if (!empty($users)) {
+            $newdata = array(
+                        'nik' => $users[0]->login_id,
+                        'username' => $users[0]->full_name,
+                        'logged_in' => TRUE
+                    );
+
+            $this->session->set_userdata($newdata);
             redirect('home');
         }else{
             $this->session->set_flashdata('error_login', '<strong>Login failed!</strong> Pleace check your user ID and password');
@@ -39,6 +46,13 @@ class UserController extends CI_Controller {
     public function listRegion()
     {   
         $process = $this->User->getRegion();
+
+        $this->_toJson($process);   
+    }
+
+    public function listStore()
+    {   
+        $process = $this->User->getStore();
 
         $this->_toJson($process);   
     }

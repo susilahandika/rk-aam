@@ -35,6 +35,23 @@ class Item extends CI_Model {
         }
     }
 
+    public function getItemByCategory($category_id, $region_id)
+    {
+        $this->db->where('category_id', $category_id);
+        $this->db->where('region_id', $region_id);
+        $output = $this->db
+                    ->get($this->table)
+                    ->result();
+
+        $db_error = $this->db->error();
+
+        if(!empty($db_error) and $db_error['code'] !=0 ){
+            return $db_error;
+        } else{
+            return $output;
+        }
+    }
+
     public function insert($data)
     {
         $this->db->insert($this->table, $data);
