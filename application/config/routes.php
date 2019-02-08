@@ -86,5 +86,7 @@ $route['schedule/cekstorechecklist']['POST'] = 'ScheduleController/cekStoreCheck
 
 /* ----- Routes Checklist ----- */
 $route['checklist'] = 'ChecklistController/index';
-$route['checklist/(:any)']['GET'] = 'ChecklistController/checklistCategory/$1';
+$route['checklist/(:any)/(:any)']['GET'] = 'ChecklistController/checklistCategory/$1/$2';
 $route['checklist/store']['POST'] = 'ChecklistController/store';
+$route['checklist/start']['POST'] = 'ChecklistController/startChecklist';
+$route['checklist/cek_already_exist']['GET'] = 'ChecklistController/isAlreadyChecklist';

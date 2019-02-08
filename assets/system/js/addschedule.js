@@ -90,11 +90,10 @@ $(document).ready(function () {
 		var year = $('#year').val();
 		var created_id = '219001287';
 		var id = year + 
-				($('#month').val() < 9 ? "0" : "") + $('#month').val() +
+				($('#month').val() < 10 ? "0" : "") + $('#month').val() +
 				region_id + 
-				dept_id + 
+				(dept_id < 10 ? "0" : "") + dept_id +
 				created_id.substring(4,9);
-
 		
 		var _data = {
 			'id': id,

@@ -22,3 +22,29 @@
 
 <!-- iCheck for checkboxes and radio inputs -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/iCheck/all.css">
+
+<style>
+
+	.navbar-inverse { background-color: #158C0D}
+	.navbar-inverse .navbar-nav>.active>a:hover,.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus { background-color: #054D00}
+	.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.open>a,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus { background-color: #080808}
+	.dropdown-menu { background-color: #FFFFFF}
+	.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { background-color: #428BCA}
+	.navbar-inverse { background-image: none; }
+	.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { background-image: none; }
+	.navbar-inverse { border-color: #158C0D}
+	.navbar-inverse .navbar-brand { color: #080000}
+	.navbar-inverse .navbar-brand:hover { color: #FFFFFF}
+	.navbar-inverse .navbar-nav>li>a { color: #0F0F0F}
+	.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus { color: #FFFFFF}
+	.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus { color: #FFFFFF}
+	.navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus { color: #FFFFFF}
+	.dropdown-menu>li>a { color: #333333}
+	.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { color: #FFFFFF}
+	.navbar-inverse .navbar-nav>.dropdown>a .caret { border-top-color: #FF0808}
+	.navbar-inverse .navbar-nav>.dropdown>a:hover .caret { border-top-color: #FFFFFF}
+	.navbar-inverse .navbar-nav>.dropdown>a .caret { border-bottom-color: #FF0808}
+	.navbar-inverse .navbar-nav>.dropdown>a:hover .caret { border-bottom-color: #FFFFFF}
+
+</style>
+

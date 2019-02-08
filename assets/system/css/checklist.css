@@ -1,0 +1,17 @@
+@font-face {
+    font-family: Corben-Bold;
+    src: url( '../font/Corben-Bold.ttf' );
+}
+
+h1 {
+    font-family: Corben-Bold;
+    font-size:40px;
+}
+
+.top-div{
+    padding-top:5%;
+}
+
+.bg-body{
+    background-image: url('../img/bg1.png');
+}
