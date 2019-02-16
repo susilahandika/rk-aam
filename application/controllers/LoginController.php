@@ -9,8 +9,10 @@ class LoginController extends CI_Controller {
 		$this->load->view('admin/login');
     }
     
-    public function login()
+    public function loginChecklist()
     {
-
+        $this->session->sess_destroy();
+		$this->load->view('checklist/login');
     }
+
 }

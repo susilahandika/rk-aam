@@ -4,7 +4,8 @@ function getCategory(id)
     	type: "GET",
     	url: base_url() + 'category/select',
         dataType: "json",
-        cache:false,
+		cache:false,
+		async :false,
     	success: function (response) {
             $('#' + id).html('');
             $('#' + id).append('<option value="">Category</option>');
@@ -22,17 +23,37 @@ function getDepartment(id)
     	type: "GET",
     	url: base_url() + 'user/dept',
     	dataType: "json",
-    	cache: false,
+		cache: false,
+		async :false,
     	success: function (response) {
     		$('#' + id).html('');
     		$('#' + id).append('<option value="">Department</option>');
     		$.each(response, function (i, value) {
     			//  $('#dept_id').html('<option>asd</option>');
-    			$('#' + id).append('<option value="' + value.department_id + '">' + value.department + '</option>');
+    			$('#' + id).append('<option value="' + value.id + '">' + value.dept_name + '</option>');
     		});
     	}
     });
 }
+
+function getPosition(id) {
+	$.ajax({
+		type: "GET",
+		url: base_url() + 'user/position',
+		dataType: "json",
+		cache: false,
+		async: false,
+		success: function (response) {
+			$('#' + id).html('');
+			$('#' + id).append('<option value="">Position</option>');
+			$.each(response, function (i, value) {
+				//  $('#dept_id').html('<option>asd</option>');
+				$('#' + id).append('<option value="' + value.id + '">' + value.position_name + '</option>');
+			});
+		}
+	});
+}
+
 
 function getRegion(id) {
 	$.ajax({
@@ -40,6 +61,7 @@ function getRegion(id) {
 		url: base_url() + 'user/region',
 		dataType: "json",
 		cache: false,
+		async :false,
 		success: function (response) {
 			$('#' + id).html('');
 			$('#' + id).append('<option value="">Region</option>');
@@ -57,6 +79,7 @@ function getStore(id) {
 		url: base_url() + 'user/store',
 		dataType: "json",
 		cache: false,
+		async :false,
 		success: function (response) {
 			$('#' + id).html('');
 			$('#' + id).append('<option value="">Store</option>');

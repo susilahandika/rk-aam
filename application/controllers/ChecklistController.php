@@ -18,6 +18,10 @@ class ChecklistController extends CI_Controller {
         date_default_timezone_set("Asia/Makassar");
         $this->load->library('upload');
         $this->load->library('form_validation');
+
+        if (!$this->session->logged_in) {
+			header('Location:' . base_url() . 'login/checklist');
+		}
     }
 
     public function index()

@@ -13,6 +13,7 @@ class HomeController extends CI_Controller {
 
 	public function index()
 	{
+
 		$data = array(
 			'parent' => 'home',
 			'child' => ''

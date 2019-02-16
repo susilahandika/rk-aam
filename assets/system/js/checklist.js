@@ -4,6 +4,8 @@ $(document).ready(function () {
     getRegion('region_id');
     getStore('store_id');
 
+    $('#region_id').val($('#hdn_region').val());
+
     $('#form-start-checklist').submit(function (e) {
         e.preventDefault();
 

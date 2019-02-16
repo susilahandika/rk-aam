@@ -49,15 +49,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'UserController';
+$route['default_controller'] = 'ChecklistController';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['administrator'] = 'UserController';
+
 // Routes User
 $route['login/auth']['POST'] = 'UserController/auth';
+$route['login/checklist'] = 'UserController/loginChecklist';
+$route['login/checklist/auth']['POST'] = 'UserController/authChecklist';
 $route['user/dept'] = 'UserController/listDept';
 $route['user/region'] = 'UserController/listRegion';
-$route['user/store'] = 'UserController/listStore';
+$route['user/position'] = 'UserController/listPosition';
+$route['user/store']['GET'] = 'UserController/listStore';
+$route['user/list']['GET'] = 'UserController/userList';
+$route['user/select'] = 'UserController/select';
+$route['user/store']['POST'] = 'UserController/store';
+$route['user/edit/(:any)']['GET'] = 'UserController/edit/$1';
+$route['user/update/(:any)']['POST'] = 'UserController/update/$1';
+$route['user/find']['POST'] = 'UserController/userHrisByNik';
+
+// Routes UserMenu
+$route['usermenu'] = 'UserMenuController/index';
 
 // Routes Home
 $route['home'] = 'HomeController/index';

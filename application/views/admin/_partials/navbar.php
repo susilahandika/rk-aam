@@ -193,7 +193,7 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <form action="<?php echo base_url(); ?>">
+      <form action="<?php echo base_url() . 'administrator'; ?>">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title" id="modal-title">Confirmation</h4>

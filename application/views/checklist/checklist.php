@@ -7,11 +7,7 @@
 
   <?php $this->load->view('checklist/_partials/navbar') ?>
   <form action="#" id="form-store-checklist" method="POST" enctype="multipart/form-data">
-
-    <input type="hidden" name="hdn_id" id="hdn_id" value="219001287">
-    <input type="hidden" name="hdn_region" id="hdn_region" value="1000">
-    <input type="hidden" name="hdn_dept" id="hdn_dept" value="2">
-
+  
     <div class="col-sm-6">
       <div class="input-group">
         <span class="input-group-addon">Store&nbsp</span>
