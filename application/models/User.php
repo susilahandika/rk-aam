@@ -141,6 +141,23 @@ class User extends CI_Model {
         }
     }
 
+    public function getStoreByRegion($region_id)
+    {
+        $this->db = $this->load->database('mm', TRUE);
+
+        $this->db->where('region_id', $region_id);
+        $output = $this->db
+                ->get('store')->result();
+
+        $db_error = $this->db->error();
+
+        if(!empty($db_error) and $db_error['code'] !=0 ){
+            return $db_error;
+        } else{
+            return $output;
+        }
+    }
+
     public function insert($data)
     {
         $this->db3 = $this->load->database('mm', TRUE);

@@ -56,11 +56,11 @@ $(document).ready(function () {
         $('#order').val(data_table.order);
 
         $('#process').val('edit');
-        $('#modal-title').html('Update Data');
+        $('#modal-item-title').html('Update Data');
         $('#modal_msg').hide();
         $('#id').attr('disabled', 'disabled');
 
-        $("#myModal").modal("toggle");
+        $("#modal-item").modal("toggle");
     });
     /* ./Button edit */
 
@@ -69,12 +69,12 @@ $(document).ready(function () {
         e.preventDefault();
 
         $('#process').val('insert');
-        $('#modal-title').html('Insert Data');
+        $('#modal-item-title').html('Insert Data');
 
         /* Clear form insert data */
         clearForm(); 
 
-        $("#myModal").modal("toggle");
+        $("#modal-item").modal("toggle");
     });
     /* ./Button add */
 
@@ -117,11 +117,11 @@ $(document).ready(function () {
                         msg += '<p>' + response.message + '</p>';
                     }
 
-                    $("#modal-msg").html('<div class="alert alert-danger">' + msg + '</div>');
-                    $("#modal-msg").show();
+                    $("#modal-item-msg").html('<div class="alert alert-danger">' + msg + '</div>');
+                    $("#modal-item-msg").show();
                 }
                 else {
-                    $("#myModal").modal("toggle");
+                    $("#modal-item").modal("toggle");
                     table.ajax.reload(null, false);
                     $("#main-msg").html('<div class="alert alert-success">' + response.message + '</div>');
                     $("#main-msg").show();

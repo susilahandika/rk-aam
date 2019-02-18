@@ -78,4 +78,58 @@ class Schedule extends CI_Model {
         }
     }
 
+    public function all()
+    {
+        $this->db->select('a.id, a.region_id, b.region_name, a.created_date, c.full_name, a.status');
+        $this->db->from('mm_checklist.schedule_head as a');
+        $this->db->join('minimart.region as b', 'a.region_id = b.id');
+        $this->db->join('minimart.user as c', 'a.created_id = c.id');
+
+        $output = $this->db->get()->result();
+
+        $db_error = $this->db->error();
+
+        if(!empty($db_error) and $db_error['code'] !=0 ){
+            return $db_error;
+        } else{
+            return $output;
+        }
+    }
+
+    public function getScheduleById($id)
+    {
+        $this->db->select('a.id, a.region_id, b.region_name, a.month, a.year, a.created_date, c.full_name, a.status');
+        $this->db->from('mm_checklist.schedule_head as a');
+        $this->db->join('minimart.region as b', 'a.region_id = b.id');
+        $this->db->join('minimart.user as c', 'a.created_id = c.id');
+        $this->db->where('a.id', $id);
+
+        $output = $this->db->get()->result();
+
+        $db_error = $this->db->error();
+
+        if(!empty($db_error) and $db_error['code'] !=0 ){
+            return $db_error;
+        } else{
+            return $output;
+        }
+    }
+
+    public function getScheduleDetail($id)
+    {
+        $this->db->select('a.schedule_id, a.store, a.checklist_date');
+        $this->db->from('schedule_detail as a');
+        $this->db->where('a.schedule_id', $id);
+
+        $output = $this->db->get()->result();
+
+        $db_error = $this->db->error();
+
+        if(!empty($db_error) and $db_error['code'] !=0 ){
+            return $db_error;
+        } else{
+            return $output;
+        }
+    }
+
 }

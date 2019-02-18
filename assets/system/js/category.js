@@ -1,6 +1,6 @@
 $(document).ready(function () {
      /* Get department */
-     getDepartment();
+     getDepartment('dept_id');
 
     var table = $('#example').DataTable({
         "ajax": base_url() + "category/select",
@@ -26,11 +26,11 @@ $(document).ready(function () {
         $('#dept_id').val(data_table.dept_id);
         
         $('#process').val('edit');
-        $('#modal-title').html('Update Data');
-        $('#modal_msg').hide();
+        $('#modal-category-title').html('Update Data');
+        $('#modal-category-msg').hide();
         $('#id').attr('disabled', 'disabled');
 
-        $("#myModal").modal("toggle");
+        $("#modal-category").modal("toggle");
     });
     /* ./Button edit */
 
@@ -39,12 +39,11 @@ $(document).ready(function () {
         e.preventDefault();
 
         $('#process').val('insert');
-        $('#modal-title').html('Insert Data');
-        $('#modal_msg').hide();
-        $('#id').val('');
-        $('#category_name').val('');
+        $('#modal-category-title').html('Insert Data');
+        $('#modal-category-msg').hide();
+        clearForm();
 
-        $("#myModal").modal("toggle");
+        $("#modal-category").modal("toggle");
     });
     /* ./Button add */
 
@@ -83,10 +82,10 @@ $(document).ready(function () {
                         msg += '<p>' + response.message + '</p>';
                     }
 
-                    $("#modal-msg").html('<div class="alert alert-danger">' + msg + '</div>');
+                    $("#modal-category-msg").html('<div class="alert alert-danger">' + msg + '</div>');
                 }
                 else {
-                    $("#myModal").modal("toggle");
+                    $("#modal-category").modal("toggle");
                     table.ajax.reload(null, false);
                     $("#main-msg").html('<div class="alert alert-success">' + response.message + '</div>');
                     $("#main-msg").show();
@@ -99,4 +98,11 @@ $(document).ready(function () {
         });
     });
     /* ./Button save */
+
+    function clearForm()
+    {
+         $('#id').val('');
+         $('#category_name').val('');
+         $('#dept_id').val('');
+    }
 });

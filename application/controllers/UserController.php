@@ -172,6 +172,15 @@ class UserController extends CI_Controller {
         $this->_toJson($process);   
     }
 
+    public function listStoreByRegion()
+    {   
+        $data = $this->input->post();
+
+        $process = $this->user->getStoreByRegion($data['region_id']);
+
+        $this->_toJson($process);   
+    }
+
     public function userHrisByNik()
     {
         $data = $this->input->post();

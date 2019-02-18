@@ -63,6 +63,7 @@ $route['user/dept'] = 'UserController/listDept';
 $route['user/region'] = 'UserController/listRegion';
 $route['user/position'] = 'UserController/listPosition';
 $route['user/store']['GET'] = 'UserController/listStore';
+$route['user/storebyregion']['POST'] = 'UserController/listStoreByRegion';
 $route['user/list']['GET'] = 'UserController/userList';
 $route['user/select'] = 'UserController/select';
 $route['user/store']['POST'] = 'UserController/store';
@@ -93,8 +94,10 @@ $route['category/update/(:any)']['POST'] = 'CategoryController/update/$1';
 
 /* ----- Routes Schedule ----- */
 $route['schedule'] = 'ScheduleController/index';
+$route['schedule/select'] = 'ScheduleController/select';
 $route['schedule/create'] = 'ScheduleController/create';
 $route['schedule/show']['POST'] = 'ScheduleController/showSchedule';
+$route['schedule/edit/(:any)']['GET'] = 'ScheduleController/edit/$1';
 $route['schedule/store']['POST'] = 'ScheduleController/store';
 $route['schedule/cekstorechecklist']['POST'] = 'ScheduleController/cekStoreChecklist';
 

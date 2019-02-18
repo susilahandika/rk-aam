@@ -30,6 +30,13 @@ class ScheduleController extends CI_Controller {
 		]);
 	}
 
+	public function select()
+	{
+		$process = $this->schedule->all();
+
+		$this->_toJson($process);
+	}
+
 	public function create()
 	{
 		$data = array(
@@ -74,6 +81,40 @@ class ScheduleController extends CI_Controller {
 		$process = $this->schedule->insert($dataHead, $dataDetail);
 
 		$this->_toJson($process);
+	}
+
+	public function edit($id)
+	{
+		$data = array(
+			'parent' => 'schedule',
+			'child' => ''
+		);
+
+		$schedule = $this->schedule->getScheduleById($id);
+		$schedule_detail = $this->schedule->getScheduleDetail($id);
+		
+		$options = array(
+			'1' => 'Januari',
+			'2' => 'Februari',
+			'3' => 'Maret',
+			'4' => 'April',
+			'5' => 'Mei',
+			'6' => 'Juni',
+			'7' => 'Juli',
+			'8' => 'Agustus',
+			'9' => 'September',
+			'10' => 'Oktober',
+			'11' => 'November',
+			'12' => 'Desember',
+		);
+		
+		$this->load->view('admin/editschedule', [
+			'data' => $data,
+			'options' => $options,
+			'region' => $this->region->getRegion(),
+			'schedule' => $schedule,
+			'schedule_detail' => $schedule_detail,
+		]);
 	}
 
 	public function showSchedule()

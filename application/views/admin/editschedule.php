@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,6 +33,7 @@
           <div id="main-msg"></div>
 
           <div class="box-body">
+          <input type="hidden" name="id" id="id" value="<?php echo $schedule[0]->id; ?>">
             <div class="form-group">
               <label for="periode">Region</label>
               <select name="region_id" id="region_id" class="form-control input-sm"></select>
@@ -47,7 +49,7 @@
               <div class="input-group">
                 <?php 
             
-                echo form_dropdown('month', $options, $monthNow, [
+                echo form_dropdown('month', $options, $schedule[0]->month, [
                   'class' => 'form-control input-sm',
                   'id' => 'month',
                 ]); 
@@ -55,7 +57,7 @@
                 ?>
 
                 <span class="input-group-addon" id=""></span>
-                <input type="text" name="year" class="form-control input-sm" id="year" value="<?php echo $yearNow; ?>" readonly>
+                <input type="text" name="year" class="form-control input-sm" id="year" value="<?php echo $schedule[0]->year; ?>" readonly>
               </div>
               <hr>
             </div>              
@@ -83,6 +85,14 @@
                         <th>process</th>
                       </tr>
                     </thead>
+
+                    <tbody>
+											<?php foreach ($schedule_detail as $val) { ?>
+												<td><?php echo $val->store; ?></td>
+                        <td><?php echo $val->checklist_date; ?></td>
+                        <th><button id='btn-edit' class='btn btn-warning btn-sm'>Edit</button></th>
+											<?php } ?>
+                    </tbody>
 
                     <tbody></tbody>
                   </table>

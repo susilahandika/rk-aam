@@ -14,14 +14,16 @@ $(document).ready(function () {
 	/* Button add */
 	$('#btn-add').click(function (e) {
 		e.preventDefault();
+		var region_id = $('#region_id').val();
 
-		$('modal-msg').hide();
-		getStore('store');
+		$('modal-addschedule-msg').hide();
+		getStoreByRegion(region_id, 'store');
+
 		$('#store').select2({
 			placeholder: "Select store",
 		});
 
-		$("#myModal").modal("toggle");
+		$("#modal-addschedule").modal("toggle");
 
 	});
 
@@ -45,16 +47,16 @@ $(document).ready(function () {
 
 		/* Cek store checklist in database */
 		if (cekStoreChecklist(_data).responseJSON.length > 0) {
-			$("#modal-msg").html('<div class="alert alert-danger">Store already exists</div>');
-			$("#modal-msg").show();
+			$("#modal-addschedule-msg").html('<div class="alert alert-danger">Store already exists</div>');
+			$("#modal-addschedule-msg").show();
 			return false;
 		}
 
 		/* Cek if store is exists in table */
 		if(dataColumn.length > 0){
 			if (jQuery.inArray($('#store').val(), dataColumn) !== -1) {
-				$("#modal-msg").html('<div class="alert alert-danger">Store already exists</div>');
-				$("#modal-msg").show();
+				$("#modal-addschedule-msg").html('<div class="alert alert-danger">Store already exists</div>');
+				$("#modal-addschedule-msg").show();
 				return false;
 			} 
 		}
@@ -66,7 +68,7 @@ $(document).ready(function () {
 			"<button id='btn-edit' class='btn btn-warning btn-sm'>Edit</button>"
 		]).draw(false);
 
-		$("#myModal").modal("toggle");
+		$("#modal-addschedule").modal("toggle");
 
 	});
 
@@ -171,6 +173,29 @@ $(document).ready(function () {
 		});
 
 		return res;
+	}
+
+	function getStoreByRegion(region, id){
+		$.ajax({
+			type: "POST",
+			url: base_url() + 'user/storebyregion',
+			dataType: "json",
+			cache: false,
+			async: false,
+			data: {
+				'region_id': region
+			},
+			success: function (response) {
+				console.log(response);
+				
+				$('#' + id).html('');
+				$('#' + id).append('<option value="">Store</option>');
+				$.each(response, function (i, value) {
+					//  $('#dept_id').html('<option>asd</option>');
+					$('#' + id).append('<option value="' + value.id + '">' + value.store_name + '</option>');
+				});
+			}
+		});
 	}
 
 });
