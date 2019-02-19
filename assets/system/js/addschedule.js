@@ -1,6 +1,6 @@
 $(document).ready(function () {
-	getDepartment('dept_id');
-	getRegion('region_id');
+	// getDepartment('dept_id');
+	// getRegion('region_id');
 
 	/* Datatatables */
 	var table = $('#tbl-schedule-dtl').DataTable({
@@ -27,9 +27,15 @@ $(document).ready(function () {
 
 	});
 
-	/* Button save to table*/
+	/* Button save to table */
 	$('#btn-save').click(function (e) { 
 		e.preventDefault();
+
+		// table.cell(0, 0).data(45).draw();
+		var process = $('#process').val();
+		var indexRow = $('#indexRow').val();
+		var store = $('#store').val();
+		var checklist_date = $('#checklist_date').val();
 		var dataColumn = table.column(0).data();
 		var region_id = $('#region_id').val();
 		var dept_id = $('#dept_id').val();
@@ -47,26 +53,60 @@ $(document).ready(function () {
 
 		/* Cek store checklist in database */
 		if (cekStoreChecklist(_data).responseJSON.length > 0) {
-			$("#modal-addschedule-msg").html('<div class="alert alert-danger">Store already exists</div>');
-			$("#modal-addschedule-msg").show();
+			showMessageDialog('modal-addschedule-msg', 'Store already exists', 'danger');
 			return false;
 		}
 
 		/* Cek if store is exists in table */
 		if(dataColumn.length > 0){
 			if (jQuery.inArray($('#store').val(), dataColumn) !== -1) {
-				$("#modal-addschedule-msg").html('<div class="alert alert-danger">Store already exists</div>');
-				$("#modal-addschedule-msg").show();
+				showMessageDialog('modal-addschedule-msg', 'Store already exists', 'danger');
 				return false;
 			} 
 		}
+
+		if (process == 'edit') {
+			/* Edit */
+			table.cell(indexRow, 0).data(store).draw();
+			table.cell(indexRow, 1).data(checklist_date).draw();
+		} else{
+			/* Add row datatable */
+			table.row.add([
+				store,
+				checklist_date,
+				"<button id='btn-edit' class='btn btn-warning btn-sm'>Edit</button>"
+			]).draw(false);
+		}
 		
-		/* Add row datatable */
-		table.row.add([
-			$('#store').val(),
-			$('#checklist_date').val(),
-			"<button id='btn-edit' class='btn btn-warning btn-sm'>Edit</button>"
-		]).draw(false);
+		$("#modal-addschedule").modal("toggle");
+
+	});
+
+	/* Button edit schedule detail */
+	$('#tbl-schedule-dtl tbody').on('click', '#btn-edit', function (e) {
+		e.preventDefault();
+
+		var dtl_table = table.row($(this).parents('tr')).data();
+		var indexRow = table.row($(this).parents('tr')).index();
+
+		// dtl_table[0] = 44;
+
+		// table.row($(this).parents('tr')).data(dtl_table).draw();
+
+		var region_id = $('#region_id').val();
+
+		$('modal-addschedule-msg').hide();
+		getStoreByRegion(region_id, 'store');
+
+		$('#store').val(dtl_table[0]);
+		$('#checklist_date').val(dtl_table[1]);
+		$('#modal-addschedule-title').val('Edit Store');
+		$('#process').val('edit');
+		$('#indexRow').val(indexRow);
+
+		$('#store').select2({
+			placeholder: "Select store",
+		});
 
 		$("#modal-addschedule").modal("toggle");
 
@@ -75,10 +115,19 @@ $(document).ready(function () {
 	/* Button approve */
 	$('#btn-approve').click(function (e) { 
 		e.preventDefault();
-		
-		var dataColumn = table.column(0).data();
 
-		console.log(dataColumn);
+		var _data = {
+			'id': $('#id').val()
+		};
+
+		$.ajax({
+			type: "POST",
+			url: base_url() + "schedule/approve",
+			data: _data,
+			success: function (response) {
+				console.log(response);
+			}
+		});
 	});
 
 	/* Button OK */
@@ -96,6 +145,8 @@ $(document).ready(function () {
 				region_id + 
 				(dept_id < 10 ? "0" : "") + dept_id +
 				created_id.substring(4,9);
+		var process_schedule = $('#process-schedule').val();
+		var url = '';
 		
 		var _data = {
 			'id': id,
@@ -109,13 +160,26 @@ $(document).ready(function () {
 			'detail': setDetail(datatbls,id)
 		};
 
-		// console.log(detail);
+		if (process_schedule == 'edit') {
+			url = base_url() + "schedule/update";
+		}else{
+			url = base_url() + "schedule/store";
+		}
+
+		console.log(url);
+
 		$.ajax({
 			type: "POST",
-			url: base_url() + "schedule/store",
+			url: url,
 			data: _data,
 			success: function (response) {
-				console.log(response);
+				$('#id').val(response.id);
+
+				if (response.code == 0) {
+					showMessageDialog('addschedule-main-msg', response.message, 'success');
+				}else{
+					showMessageDialog('addschedule-main-msg', response.message, 'danger');
+				}
 			}
 		});
 	});
@@ -186,7 +250,6 @@ $(document).ready(function () {
 				'region_id': region
 			},
 			success: function (response) {
-				console.log(response);
 				
 				$('#' + id).html('');
 				$('#' + id).append('<option value="">Store</option>');
@@ -197,5 +260,6 @@ $(document).ready(function () {
 			}
 		});
 	}
+
 
 });

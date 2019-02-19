@@ -29,17 +29,34 @@
       <section class="content">
         <!-- Main panel -->
         <div class="box">
-          <div id="main-msg"></div>
+          <div id="addschedule-main-msg"></div>
 
           <div class="box-body">
+          <input type="hidden" name="id" id="id" value="">
             <div class="form-group">
               <label for="periode">Region</label>
-              <select name="region_id" id="region_id" class="form-control input-sm"></select>
+              <!-- <select name="region_id" id="region_id" class="form-control input-sm"></select> -->
+              <?php 
+                echo form_dropdown('region_id', $list_region, null, [
+                  'class' => 'form-control input-sm',
+                  'id' => 'region_id',
+                ]); 
+                
+              ?>
             </div>
 
             <div class="form-group">
               <label for="periode">Department</label>
-              <select name="dept_id" id="dept_id" class="form-control input-sm"></select>
+              <!-- <select name="dept_id" id="dept_id" class="form-control input-sm"></select> -->
+              <?php 
+            
+                echo form_dropdown('dept_id', $list_dept, null, [
+                  'class' => 'form-control input-sm',
+                  'id' => 'dept_id',
+                  'placeholder' => 'Department',
+                ]); 
+                
+              ?>
             </div>
 
             <div class="form-group">

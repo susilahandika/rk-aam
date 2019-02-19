@@ -6,29 +6,29 @@ class Schedule extends CI_Model {
     protected $tableHead = "schedule_head";
     protected $tableDetail = "schedule_detail";
 
-    public function deleteInsert($data, $id)
-    {
-        try {
-            $this->db->trans_begin();
+    // public function deleteInsert($data, $id)
+    // {
+    //     try {
+    //         $this->db->trans_begin();
 
-            $res = $this->db->delete($this->table, array('schedule_id' => $id));
-            $db_error = $this->db->error();
-            if(!$res) throw new Exception();
+    //         $res = $this->db->delete($this->table, array('schedule_id' => $id));
+    //         $db_error = $this->db->error();
+    //         if(!$res) throw new Exception();
 
-            $res = $this->db->insert_batch($this->table, $data);
-            $db_error = $this->db->error();
-            if(!$res) throw new Exception();
+    //         $res = $this->db->insert_batch($this->table, $data);
+    //         $db_error = $this->db->error();
+    //         if(!$res) throw new Exception();
 
-            $this->db->trans_commit();
-            $db_error['message'] = 'success insert data';
+    //         $this->db->trans_commit();
+    //         $db_error['message'] = 'success insert data';
 
-        } catch (Exception $e) {
-            $this->db->trans_rollback();
-        }
+    //     } catch (Exception $e) {
+    //         $this->db->trans_rollback();
+    //     }
 
-        return $db_error;
+    //     return $db_error;
 
-    }
+    // }
 
     public function insert($dataHead, $dataDetail)
     {
@@ -45,6 +45,35 @@ class Schedule extends CI_Model {
 
             $this->db->trans_commit();
             $db_error['message'] = 'success insert data';
+            $db_error['id'] = $dataHead['id'];
+            
+        } catch (Exception $e) {
+            $this->db->trans_rollback();
+        }
+
+        return $db_error;
+    }
+
+    public function deleteInsert($dataHead, $dataDetail)
+    {
+        try {
+            $this->db->trans_begin();
+
+            $res = $this->db->delete($this->tableHead, array('id' => $dataHead['id']));
+            $db_error = $this->db->error();
+            if(!$res) throw new Exception();
+
+            $res = $this->db->insert($this->tableHead, $dataHead);
+            $db_error = $this->db->error();
+            if(!$res) throw new Exception();
+
+            $res = $this->db->insert_batch($this->tableDetail, $dataDetail);
+            $db_error = $this->db->error();
+            if(!$res) throw new Exception();
+
+            $this->db->trans_commit();
+            $db_error['message'] = 'success update data';
+            $db_error['id'] = $dataHead['id'];
             
         } catch (Exception $e) {
             $this->db->trans_rollback();
@@ -98,7 +127,7 @@ class Schedule extends CI_Model {
 
     public function getScheduleById($id)
     {
-        $this->db->select('a.id, a.region_id, b.region_name, a.month, a.year, a.created_date, c.full_name, a.status');
+        $this->db->select('a.id, a.region_id, b.region_name, a.dept_id, a.month, a.year, a.created_date, c.full_name, a.status');
         $this->db->from('mm_checklist.schedule_head as a');
         $this->db->join('minimart.region as b', 'a.region_id = b.id');
         $this->db->join('minimart.user as c', 'a.created_id = c.id');
@@ -130,6 +159,20 @@ class Schedule extends CI_Model {
         } else{
             return $output;
         }
+    }
+
+    public function approveSchedule($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->update($this->tableHead, ['status' => 'approved']);
+
+        $db_error = $this->db->error();
+
+        if( $db_error['code'] == 0 ){
+            $db_error['message'] = 'schedule has been approved';
+        }
+
+        return $db_error;
     }
 
 }

@@ -17,12 +17,12 @@
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
-          Add Schedule
+          Edit Schedule
         </h1>
         <ol class="breadcrumb">
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
           <li><a href="../schedule"><i class="fa fa-dashboard"></i> Schedule</a></li>
-          <li class="active">Add</li>
+          <li class="active">Edit</li>
         </ol>
       </section>
 
@@ -30,18 +30,38 @@
       <section class="content">
         <!-- Main panel -->
         <div class="box">
-          <div id="main-msg"></div>
+          <div id="addschedule-main-msg"></div>
 
           <div class="box-body">
           <input type="hidden" name="id" id="id" value="<?php echo $schedule[0]->id; ?>">
+          <input type="hidden" name="process-schedule" id="process-schedule" value="edit">
             <div class="form-group">
               <label for="periode">Region</label>
-              <select name="region_id" id="region_id" class="form-control input-sm"></select>
+              <input type="hidden" name="hdn-region-id" id="hdn-region-id" value="<?php echo $schedule[0]->region_id; ?>">
+              <!-- <select name="region_id" id="region_id" class="form-control input-sm"></select> -->
+
+              <?php 
+                echo form_dropdown('region_id', $list_region, $schedule[0]->region_id, [
+                  'class' => 'form-control input-sm',
+                  'id' => 'region_id',
+                ]); 
+                
+              ?>
             </div>
 
             <div class="form-group">
               <label for="periode">Department</label>
-              <select name="dept_id" id="dept_id" class="form-control input-sm"></select>
+              <input type="hidden" name="hdn-dept-id" id="hdn-dept-id" value="<?php echo $schedule[0]->dept_id; ?>">
+              <!-- <select name="dept_id" id="dept_id" class="form-control input-sm"></select> -->
+
+              <?php 
+            
+                echo form_dropdown('dept_id', $list_dept, $schedule[0]->dept_id, [
+                  'class' => 'form-control input-sm',
+                  'id' => 'dept_id',
+                ]); 
+                
+              ?>
             </div>
 
             <div class="form-group">
@@ -107,8 +127,8 @@
           <div class="box-footer">
             <!-- <a class="btn btn-success btn-flat" href="schedule/create" id="btn-add">Add</a> -->
             <div class="pull-right">
-              <input type="button" class="btn btn-success btn-flat" id="btn-ok" value="OK">
-              <input type="button" class="btn btn-success btn-flat" id="btn-approve" value="Approve">
+              <input type="button" class="btn btn-success btn-flat" id="btn-ok" <?php echo ($schedule[0]->status == 'approved') ? 'disabled="disabled"' : '' ?> value="OK">
+              <input type="button" class="btn btn-success btn-flat" id="btn-approve" <?php echo ($schedule[0]->status == 'approved') ? 'disabled="disabled"' : '' ?> value="Approve">
             </div>
           </div>
 
@@ -128,8 +148,9 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title" id="modal-addschedule-title">Add Store</h4>
+            <h4 class="modal-title" id="modal-addschedule-title">Header</h4>
             <input type="hidden" name="" id="process">
+            <input type="hidden" name="" id="indexRow">
           </div>
           <div class="modal-body">
             <div id="modal-addschedule-msg"></div>

@@ -15,6 +15,7 @@ class ScheduleController extends CI_Controller {
 		$this->load->library('PHPExcel');
 		$this->load->model($this->model, 'schedule');
 		$this->load->model($this->model2, 'sched_detail');
+		$this->load->model('User', 'user');
 		$this->load->model('Region', 'region');
 	}
 
@@ -44,7 +45,11 @@ class ScheduleController extends CI_Controller {
 			'child' => ''
 		);
 
-		$region = array();
+		$list_region = $this->user->getRegion();
+		$list_dept = $this->user->getDept(1000);
+
+		$list_regions = $this->_setSelectVal(json_decode(json_encode($list_region),true), 'id', 'region_name', 'Region');
+		$list_depts = $this->_setSelectVal(json_decode(json_encode($list_dept),true), 'id', 'dept_name', 'Department');
 
 		$options = array(
 			'1' => 'Januari',
@@ -64,9 +69,10 @@ class ScheduleController extends CI_Controller {
 		$this->load->view('admin/addschedule', [
 			'data' => $data,
 			'options' => $options,
-			'region' => $this->region->getRegion(),
 			'monthNow' => $this->nextPeriode(date("m")),
 			'yearNow' =>date("Y"),
+			'list_region' => $list_regions,
+			'list_dept' => $list_depts,
 		]);
 	}
 
@@ -92,7 +98,12 @@ class ScheduleController extends CI_Controller {
 
 		$schedule = $this->schedule->getScheduleById($id);
 		$schedule_detail = $this->schedule->getScheduleDetail($id);
-		
+		$list_region = $this->user->getRegion();
+		$list_dept = $this->user->getDept($schedule[0]->region_id);
+
+		$list_regions = $this->_setSelectVal(json_decode(json_encode($list_region),true), 'id', 'region_name', '');
+		$list_depts = $this->_setSelectVal(json_decode(json_encode($list_dept),true), 'id', 'dept_name', '');
+
 		$options = array(
 			'1' => 'Januari',
 			'2' => 'Februari',
@@ -111,10 +122,33 @@ class ScheduleController extends CI_Controller {
 		$this->load->view('admin/editschedule', [
 			'data' => $data,
 			'options' => $options,
-			'region' => $this->region->getRegion(),
 			'schedule' => $schedule,
 			'schedule_detail' => $schedule_detail,
+			'list_region' => $list_regions,
+			'list_dept' => $list_depts,
 		]);
+	}
+	
+	public function update()
+	{
+		$data = $this->input->post();
+
+		$dataDetail = $data['detail'];
+		unset($data['detail']);
+		$dataHead = $data;
+
+		$process = $this->schedule->deleteInsert($dataHead, $dataDetail);
+
+		$this->_toJson($process);
+	}
+
+	public function approve()
+	{
+		$data = $this->input->post();
+
+		$process = $this->schedule->approveSchedule($data['id']);
+
+		$this->_toJson($process);
 	}
 
 	public function showSchedule()
@@ -225,6 +259,21 @@ class ScheduleController extends CI_Controller {
             ->_display();
 
         exit;
+	}
+
+	public function _setSelectVal($data, $key, $val, $placeholder)
+	{
+		$list = array();
+
+		if($placeholder != ''){
+			$list[''] = $placeholder;
+		}
+
+		foreach ($data as $value) {
+			$list[$value[$key]] = $value[$val];
+		}
+
+		return $list;
 	}
 	
 }

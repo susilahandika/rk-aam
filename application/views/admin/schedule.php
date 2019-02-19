@@ -28,9 +28,9 @@
       <section class="content">
         <!-- Main panel -->
         <div class="box">
-          <div id="main-msg"></div>
+          <div id="schedule-main-msg"></div>
           <div class="box-body">
-            <table id="example" class="display table table-bordered table-striped" style="width:100%">
+            <table id="example" class="display table table-bordered" style="width:100%">
               <thead>
                 <tr>
                     <th>ID</th>

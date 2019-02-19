@@ -99,6 +99,8 @@ $route['schedule/create'] = 'ScheduleController/create';
 $route['schedule/show']['POST'] = 'ScheduleController/showSchedule';
 $route['schedule/edit/(:any)']['GET'] = 'ScheduleController/edit/$1';
 $route['schedule/store']['POST'] = 'ScheduleController/store';
+$route['schedule/update']['POST'] = 'ScheduleController/update';
+$route['schedule/approve']['POST'] = 'ScheduleController/approve';
 $route['schedule/cekstorechecklist']['POST'] = 'ScheduleController/cekStoreChecklist';
 
 /* ----- Routes Checklist ----- */

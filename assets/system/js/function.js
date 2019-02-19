@@ -5,7 +5,7 @@ function getCategory(id)
     	url: base_url() + 'category/select',
         dataType: "json",
 		cache:false,
-		async :false,
+		// async :false,
     	success: function (response) {
             $('#' + id).html('');
             $('#' + id).append('<option value="">Category</option>');
@@ -24,7 +24,7 @@ function getDepartment(id)
     	url: base_url() + 'user/dept',
     	dataType: "json",
 		cache: false,
-		async :false,
+		// async :false,
     	success: function (response) {
     		$('#' + id).html('');
     		$('#' + id).append('<option value="">Department</option>');
@@ -54,14 +54,13 @@ function getPosition(id) {
 	});
 }
 
-
 function getRegion(id) {
 	$.ajax({
 		type: "GET",
 		url: base_url() + 'user/region',
 		dataType: "json",
 		cache: false,
-		async :false,
+		// async :false,
 		success: function (response) {
 			$('#' + id).html('');
 			$('#' + id).append('<option value="">Region</option>');
@@ -79,7 +78,7 @@ function getStore(id) {
 		url: base_url() + 'user/store',
 		dataType: "json",
 		cache: false,
-		async :false,
+		// async :false,
 		success: function (response) {
 			$('#' + id).html('');
 			$('#' + id).append('<option value="">Store</option>');
@@ -89,4 +88,13 @@ function getStore(id) {
 			});
 		}
 	});
+}
+
+function showMessageDialog(id, msg, type) {
+	$("#" + id).html('<div class="alert alert-' + type + '">' + msg + '</div>');
+	$("#" + id).show();
+
+	setTimeout(function () {
+		$("#" + id).hide('slow');
+	}, 3000);
 }
