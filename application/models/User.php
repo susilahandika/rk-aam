@@ -95,6 +95,23 @@ class User extends CI_Model {
         }
     }
 
+    public function getUser()
+    {
+        $this->db3 = $this->load->database('mm', TRUE);
+        
+        $output = $this->db3
+                ->select('id, full_name')
+                ->get('user')->result();
+
+        $db_error = $this->db3->error();
+
+        if(!empty($db_error) and $db_error['code'] !=0 ){
+            return $db_error;
+        } else{
+            return $output;
+        }
+    }
+
     public function getRegion()
     {
         
@@ -186,5 +203,21 @@ class User extends CI_Model {
         }
 
         return $db_error;
+    }
+
+    public function getCountPendingApp($user_id)
+    {
+        $this->db->select('count(*) as qty_pending');
+        $this->db->from('schedule_app_pending');
+        $this->db->where('user_id', $user_id);
+        $output = $this->db->get()->result();
+
+        $db_error = $this->db->error();
+
+        if(!empty($db_error) and $db_error['code'] !=0 ){
+            return $db_error;
+        } else{
+            return $output;
+        }
     }
 }

@@ -85,6 +85,13 @@ $password_hris = 't34m1tmm';
 $database_hris = 'hairisma_mm';
 $dbdriver_hris = 'mysqli';
 
+$dsn_temp_login = '';
+$hostname_temp_login = 'localhost';
+$username_temp_login = 'root';
+$password_temp_login = '';
+$database_temp_login = 'temp_login';
+$dbdriver_temp_login = 'mysqli';
+
 $dsn_mm = '';
 $hostname_mm = 'localhost';
 $username_mm = 'root';
@@ -118,12 +125,12 @@ $db['default'] = array(
 );
 
 $db['hris'] = array(
-	'dsn'	=> $dsn_hris,
-	'hostname' => $hostname_hris,
-	'username' => $username_hris,
-	'password' => $password_hris,
-	'database' => $database_hris,
-	'dbdriver' => $dbdriver_hris,
+	'dsn'	=> $dsn_temp_login,
+	'hostname' => $hostname_temp_login,
+	'username' => $username_temp_login,
+	'password' => $password_temp_login,
+	'database' => $database_temp_login,
+	'dbdriver' => $dbdriver_temp_login,
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => FALSE,

@@ -17,16 +17,31 @@ class ScheduleController extends CI_Controller {
 		$this->load->model($this->model2, 'sched_detail');
 		$this->load->model('User', 'user');
 		$this->load->model('Region', 'region');
+		date_default_timezone_set("Asia/Makassar");
 	}
 
 	public function index()
 	{
 		$data = array(
 			'parent' => 'schedule',
-			'child' => ''
+			'child' => 'schedule_checklist',
+			'notif' => $this->user->getCountPendingApp($_SESSION['nik']),
 		);
 		
 		$this->load->view('admin/schedule', [
+			'data' => $data,
+		]);
+	}
+
+	public function listSchedulePending()
+	{
+		$data = array(
+			'parent' => 'schedule',
+			'child' => 'schedule_pending',
+			'notif' => $this->user->getCountPendingApp($_SESSION['nik']),
+		);
+		
+		$this->load->view('admin/schedulepending', [
 			'data' => $data,
 		]);
 	}
@@ -38,11 +53,19 @@ class ScheduleController extends CI_Controller {
 		$this->_toJson($process);
 	}
 
+	public function selectPending($user_id)
+	{
+		$process = $this->schedule->schedulePending($user_id);
+
+		$this->_toJson($process);
+	}
+
 	public function create()
 	{
 		$data = array(
 			'parent' => 'schedule',
-			'child' => ''
+			'child' => '',
+			'notif' => $this->user->getCountPendingApp($_SESSION['nik']),
 		);
 
 		$list_region = $this->user->getRegion();
@@ -93,13 +116,14 @@ class ScheduleController extends CI_Controller {
 	{
 		$data = array(
 			'parent' => 'schedule',
-			'child' => ''
+			'child' => '',
+			'notif' => $this->user->getCountPendingApp($_SESSION['nik']),
 		);
 
 		$schedule = $this->schedule->getScheduleById($id);
 		$schedule_detail = $this->schedule->getScheduleDetail($id);
 		$list_region = $this->user->getRegion();
-		$list_dept = $this->user->getDept($schedule[0]->region_id);
+		$list_dept = $this->user->getDept('1000');
 
 		$list_regions = $this->_setSelectVal(json_decode(json_encode($list_region),true), 'id', 'region_name', '');
 		$list_depts = $this->_setSelectVal(json_decode(json_encode($list_dept),true), 'id', 'dept_name', '');
@@ -146,7 +170,13 @@ class ScheduleController extends CI_Controller {
 	{
 		$data = $this->input->post();
 
-		$process = $this->schedule->approveSchedule($data['id']);
+		$data_approve = array(
+			'schedule_id'=> $data['id'],
+			'app_id' => $data['user_id'],
+			'app_date' => date('Y-m-d h:i:sa'),
+		);
+
+		$process = $this->schedule->approveSchedule($data_approve);
 
 		$this->_toJson($process);
 	}

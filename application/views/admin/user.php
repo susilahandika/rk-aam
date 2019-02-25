@@ -123,5 +123,6 @@
   <script src="<?php echo base_url();?>/assets/system/js/user.js"></script>
   <script src="<?php echo base_url();?>/assets/system/js/function.js"></script>
   <script src="<?php echo base_url();?>/assets/system/js/link.js"></script>
+  <script src="<?php echo base_url();?>/assets/system/js/header.js"></script>
 </body>
 </html>

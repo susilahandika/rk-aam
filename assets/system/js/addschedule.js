@@ -117,7 +117,8 @@ $(document).ready(function () {
 		e.preventDefault();
 
 		var _data = {
-			'id': $('#id').val()
+			'id': $('#id').val(),
+			'user_id': $('#user_id').val()
 		};
 
 		$.ajax({

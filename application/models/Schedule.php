@@ -125,6 +125,26 @@ class Schedule extends CI_Model {
         }
     }
 
+    public function schedulePending($user_id)
+    {
+        $this->db->select('a.id, a.region_id, b.region_name, a.created_date, c.full_name, a.status');
+        $this->db->from('mm_checklist.schedule_head as a');
+        $this->db->join('minimart.region as b', 'a.region_id = b.id');
+        $this->db->join('minimart.user as c', 'a.created_id = c.id');
+        $this->db->join('mm_checklist.schedule_app_pending as d', 'a.id = d.schedule_id');
+        $this->db->where('d.user_id', $user_id);
+
+        $output = $this->db->get()->result();
+
+        $db_error = $this->db->error();
+
+        if(!empty($db_error) and $db_error['code'] !=0 ){
+            return $db_error;
+        } else{
+            return $output;
+        }
+    }
+
     public function getScheduleById($id)
     {
         $this->db->select('a.id, a.region_id, b.region_name, a.dept_id, a.month, a.year, a.created_date, c.full_name, a.status');
@@ -161,15 +181,39 @@ class Schedule extends CI_Model {
         }
     }
 
-    public function approveSchedule($id)
+    public function approveSchedule($data)
     {
-        $this->db->where('id', $id);
-        $this->db->update($this->tableHead, ['status' => 'approved']);
+        // $this->db->where('id', $id);
+        // $this->db->update($this->tableHead, ['status' => 'approved']);
 
-        $db_error = $this->db->error();
+        // $db_error = $this->db->error();
 
-        if( $db_error['code'] == 0 ){
-            $db_error['message'] = 'schedule has been approved';
+        // if( $db_error['code'] == 0 ){
+        //     $db_error['message'] = 'schedule has been approved';
+        // }
+
+        // return $db_error;
+
+        try {
+            $this->db->trans_begin();
+
+            // $this->db->where('id', $data['schedule_id']);
+            // $res = $this->db->update($this->tableHead, ['status' => 'approved']);
+            // $db_error = $this->db->error();
+            // if(!$res) throw new Exception();
+
+            $res = $this->db->insert('schedule_app', $data);
+            $db_error = $this->db->error();
+            if(!$res) throw new Exception();
+
+
+            $this->db->trans_commit();
+            if( $db_error['code'] == 0 ){
+                $db_error['message'] = 'schedule has been approved';
+            }
+            
+        } catch (Exception $e) {
+            $this->db->trans_rollback();
         }
 
         return $db_error;

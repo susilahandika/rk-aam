@@ -1,6 +1,8 @@
 $(document).ready(function () {
+    var user_id = $('#user_id').val();
+
     var table = $('#example').DataTable({
-        "ajax": base_url() + "schedule/select",
+        "ajax": base_url() + "schedule/selectpending/" + user_id,
         "sAjaxDataProp": "",
         "columns": [
             { "data": "id" },
@@ -29,7 +31,7 @@ $(document).ready(function () {
         		return '<a href="#" class="btn btn-warning btn-flat btn-sm" id="btn-edit">Edit</a>';
         	}
         }
-    ],
+    ], 
         "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) { 
         	if (aData.status == "approve") {
         		$('td', nRow).css('background-color', '#fff5b2');

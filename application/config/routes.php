@@ -62,6 +62,7 @@ $route['login/checklist/auth']['POST'] = 'UserController/authChecklist';
 $route['user/dept'] = 'UserController/listDept';
 $route['user/region'] = 'UserController/listRegion';
 $route['user/position'] = 'UserController/listPosition';
+$route['user/user'] = 'UserController/listUser';
 $route['user/store']['GET'] = 'UserController/listStore';
 $route['user/storebyregion']['POST'] = 'UserController/listStoreByRegion';
 $route['user/list']['GET'] = 'UserController/userList';
@@ -94,6 +95,8 @@ $route['category/update/(:any)']['POST'] = 'CategoryController/update/$1';
 
 /* ----- Routes Schedule ----- */
 $route['schedule'] = 'ScheduleController/index';
+$route['schedule/schedulepending'] = 'ScheduleController/listSchedulePending';
+$route['schedule/selectpending/(:any)'] = 'ScheduleController/selectPending/$1';
 $route['schedule/select'] = 'ScheduleController/select';
 $route['schedule/create'] = 'ScheduleController/create';
 $route['schedule/show']['POST'] = 'ScheduleController/showSchedule';
@@ -109,3 +112,8 @@ $route['checklist/(:any)/(:any)']['GET'] = 'ChecklistController/checklistCategor
 $route['checklist/store']['POST'] = 'ChecklistController/store';
 $route['checklist/start']['POST'] = 'ChecklistController/startChecklist';
 $route['checklist/cek_already_exist']['GET'] = 'ChecklistController/isAlreadyChecklist';
+
+/* ----- Routes Matriks App ----- */
+$route['matriksapp'] = 'MatriksappController/index';
+$route['matriksapp/getMatriks'] = 'MatriksappController/getMatriks';
+$route['matriksapp/store']['POST'] = 'MatriksappController/store';

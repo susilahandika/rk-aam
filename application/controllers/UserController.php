@@ -46,11 +46,11 @@ class UserController extends CI_Controller {
                 redirect('home');
             }else{
                 $this->session->set_flashdata('error_login', '<strong>Login failed!</strong> User not registered');
-                redirect('login/checklist');
+                redirect(base_url() . 'administrator');
             }
         }else{
             $this->session->set_flashdata('error_login', '<strong>Login failed!</strong> Pleace check your user ID and password');
-            redirect(base_url());
+            redirect(base_url() . 'administrator');
         }
     }
 
@@ -88,7 +88,8 @@ class UserController extends CI_Controller {
     {
          $data = array(
             'parent' => 'setting',
-            'child' => 'user'
+            'child' => 'user',
+            'notif' => $this->user->getCountPendingApp($_SESSION['nik']),
         );
 
         $this->load->view('admin/user', [
@@ -140,6 +141,15 @@ class UserController extends CI_Controller {
         }
 
         $this->_toJson($process);
+    }
+
+    public function listUser()
+    {   
+        // $data = $this->input->post();
+
+        $process = $this->user->getUser();
+
+        $this->_toJson($process);   
     }
 
     public function listDept()
@@ -211,4 +221,5 @@ class UserController extends CI_Controller {
 
         exit;
     }
+
 }

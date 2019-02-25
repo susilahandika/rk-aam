@@ -9,6 +9,7 @@ class CategoryController extends CI_Controller {
     {
         parent::__construct();
         $this->load->model($this->model, 'data');
+        $this->load->model('User', 'user');
         $this->load->library('form_validation');
     }
 
@@ -16,7 +17,8 @@ class CategoryController extends CI_Controller {
     {
         $data = array(
             'parent' => 'setting',
-            'child' => 'category'
+            'child' => 'category',
+            'notif' => $this->user->getCountPendingApp($_SESSION['nik']),
         );
 
         $this->load->view('admin/category', [

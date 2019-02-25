@@ -1,5 +1,6 @@
 <?php
 $menu = explode(",", $_SESSION['menu']);
+$user_id = $_SESSION['nik'];
 ?>
 
 <!-- Left side column. contains the logo and sidebar -->
@@ -38,12 +39,33 @@ $menu = explode(",", $_SESSION['menu']);
               <li class="<?php echo ($child == 'user_menu') ? 'active' : ''; ?>"><a href="<?php echo base_url(); ?>usermenu"><i class="fa fa-circle-o"></i> User Menu</a></li>
             <?php } ?>
 
+            <?php if(in_array(11, $menu)){ ?>
+              <li class="<?php echo ($child == 'matriks_app') ? 'active' : ''; ?>"><a href="<?php echo base_url(); ?>matriksapp"><i class="fa fa-circle-o"></i> Matriks Approval</a></li>
+            <?php } ?>
+
           </ul>
         </li>
       <?php } ?>
       
       <?php if(in_array(6, $menu)){ ?>
-        <li class="<?php echo ($parent == 'schedule') ? 'active' : ''; ?>"><a href="<?php echo base_url(); ?>schedule"><i class="fa fa-calendar"></i> <span>Schedule</span></a></li>
+        <li class="<?php echo ($parent == 'schedule') ? 'active' : ''; ?> treeview">
+          <a href="#">
+            <i class="fa fa-files-o"></i> <span>Schedule</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <?php if(in_array(12, $menu)){ ?>
+              <li class="<?php echo ($child == 'schedule_pending') ? 'active' : ''; ?>"><a href="<?php echo base_url() . 'schedule/schedulepending/' . $user_id; ?>"><i class="fa fa-circle-o"></i> Schedule Pending</a></li>
+            <?php } ?>
+
+            <?php if(in_array(13, $menu)){ ?>
+              <li class="<?php echo ($child == 'schedule_checklist') ? 'active' : ''; ?>"><a href="<?php echo base_url() . 'schedule'; ?>"><i class="fa fa-circle-o"></i> Schedule Checklist</a></li>
+            <?php } ?>
+            
+          </ul>
+        </li>
       <?php } ?>
       
       <?php if(in_array(7, $menu)){ ?>

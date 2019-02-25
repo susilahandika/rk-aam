@@ -6,6 +6,7 @@ class HomeController extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('User', 'user');
 		if (!$this->session->logged_in) {
 			header('Location:' . base_url());
 		}
@@ -16,9 +17,10 @@ class HomeController extends CI_Controller {
 
 		$data = array(
 			'parent' => 'home',
-			'child' => ''
+			'child' => '',
+			'notif' => $this->user->getCountPendingApp($_SESSION['nik']),
 		);
-		
+
 		$this->load->view('admin/home', [
 			'data' => $data
 		]);

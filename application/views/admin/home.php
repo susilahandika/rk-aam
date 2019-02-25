@@ -42,6 +42,7 @@
   <!-- ./wrapper -->
 
   <?php $this->load->view('admin/_partials/js') ?>
+  <script src="<?php echo base_url();?>/assets/system/js/header.js"></script>
 
 </body>
 </html>

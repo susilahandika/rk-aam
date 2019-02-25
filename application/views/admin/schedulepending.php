@@ -45,9 +45,9 @@
             </table>
           </div>
 
-          <div class="box-footer">
+          <!-- <div class="box-footer">
             <a class="btn btn-success btn-flat" href="schedule/create" id="btn-add">Add</a>
-          </div>
+          </div> -->
         </div>
         <!-- /.Main panel -->
       </section>
@@ -62,10 +62,9 @@
   <!-- ./wrapper -->
 
   <?php $this->load->view('admin/_partials/js') ?>
-  <script src="<?php echo base_url();?>/assets/system/js/schedule.js"></script>
+  <script src="<?php echo base_url();?>/assets/system/js/schedulepending.js"></script>
   <script src="<?php echo base_url();?>/assets/system/js/function.js"></script>
   <script src="<?php echo base_url();?>/assets/system/js/link.js"></script>
-  <script src="<?php echo base_url();?>/assets/system/js/header.js"></script>
 
 </body>
 </html>
