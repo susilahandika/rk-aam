@@ -43,6 +43,8 @@ class Schedule extends CI_Model {
             $db_error = $this->db->error();
             if(!$res) throw new Exception();
 
+            $this->approveSchedule($dataHead);
+
             $this->db->trans_commit();
             $db_error['message'] = 'success insert data';
             $db_error['id'] = $dataHead['id'];
@@ -206,6 +208,10 @@ class Schedule extends CI_Model {
             $db_error = $this->db->error();
             if(!$res) throw new Exception();
 
+            $res = $this->db->query('call ins_next_app_sched(' . $data['schedule_id'] . ')');
+            $db_error = $this->db->error();
+            if(!$res) throw new Exception();
+
 
             $this->db->trans_commit();
             if( $db_error['code'] == 0 ){
@@ -217,6 +223,19 @@ class Schedule extends CI_Model {
         }
 
         return $db_error;
+    }
+
+    public function isApproved($schedule_id, $user_id)
+    {
+        $output = $this->db->query("CALL last_level_app($schedule_id, $user_id)")->result();
+
+        $db_error = $this->db->error();
+
+        if(!empty($db_error) and $db_error['code'] !=0 ){
+            return $db_error;
+        } else{
+            return $output;
+        }
     }
 
 }

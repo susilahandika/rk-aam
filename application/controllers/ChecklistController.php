@@ -34,27 +34,29 @@ class ChecklistController extends CI_Controller {
         $data = $this->input->post();
         $data['year'] = date('Y');
         $data['month'] = date('m');
+        $data['date'] = date('Y-m-d');
         $data['dept_id'] = '2';
 
-        /* Cek store in region */
-        if($this->isStoreRegion($data['store_id'], $data['region_id']) == true){
-            /* Cek store already chcecklist */
-            if($this->isAlreadyChecklist($data)){
-                $process['error'] = 13;
-                $process['message'] = array(
-                                        'error' => 'Store is already checklist'
-                                    );
-                $process['url'] = base_url() . 'checklist';
-            } else{
-                $process['error'] = 0;
-                $process['url'] = base_url() . 'checklist/' . $data['region_id'] . '/' . $data['store_id'];
-            }
-        }else{
+        if($this->isStoreRegion($data['store_id'], $data['region_id']) == false){
             $process['error'] = 13;
             $process['message'] = array(
                                     'error' => 'Store is not in region'
                                 );
             $process['url'] = base_url() . 'checklist';
+        } elseif($this->isAlreadyChecklist($data)){
+            $process['error'] = 13;
+            $process['message'] = array(
+                                    'error' => 'Store is already checklist'
+                                );
+            $process['url'] = base_url() . 'checklist';           
+        } elseif($this->isOnShcedule($data)==false){
+            $process['error'] = 13;
+            $process['message'] = array(
+                                    'error' => 'Store is not on schedule'
+                                );
+        } else{
+            $process['error'] = 0;
+            $process['url'] = base_url() . 'checklist/' . $data['region_id'] . '/' . $data['store_id'];
         }
 
         $this->_toJson($process);
@@ -98,7 +100,7 @@ class ChecklistController extends CI_Controller {
         $checklist['head'] = array(
             'id' => $id,
             'checklist_date' => $data['checklist_date'],
-            'checklist_id' => $data['hdn_id'],
+            'checklist_id' => '20190410000201287',
             'region_id' => $data['hdn_region'],
             'dept_id' => $data['hdn_dept'],
             'store' => $data['store'],
@@ -109,7 +111,7 @@ class ChecklistController extends CI_Controller {
 
         for ($i=0; $i < count($data['choice']); $i++) { 
             $this->img_name = '';
-            // $this->uploadImage('img_checklist' . array_keys($data['choice'])[$i]);
+            $this->uploadImage('img_checklist' . array_keys($data['choice'])[$i]);
 
             $data_checklist = array(
                 'checklist_id' => $id,
@@ -124,10 +126,14 @@ class ChecklistController extends CI_Controller {
 
         $process = $this->checklist->insert($checklist);
 
+        // echo "<pre>";
+        // print_r($process);
+        // echo "</pre>";
+
         $this->_toJson($process);
 
         // echo "<pre>";
-        // print_r($process);
+        // print_r($data);
         // echo "</pre>";
     }
 
@@ -168,7 +174,7 @@ class ChecklistController extends CI_Controller {
             }
                       
         }else{
-            echo "Image yang diupload kosong";
+            // echo "Image yang diupload kosong";
         }
     }
 
@@ -194,6 +200,18 @@ class ChecklistController extends CI_Controller {
 
         return $output;
         
+    }
+
+    public function isOnShcedule($data)
+    {
+        $process = $this->checklist->getChecklistShedule($data);
+        $output = false;
+
+        if($process[0]->output > 0){
+            $output = true;
+        }
+
+        return $output;
     }
 
     public function validate()

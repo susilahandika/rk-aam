@@ -116,6 +116,9 @@ $(document).ready(function () {
 	$('#btn-approve').click(function (e) { 
 		e.preventDefault();
 
+		// $('#btn-approve').attr('disabled', 'disabled');
+		// $('#btn-ok').attr('disabled', 'disabled');
+
 		var _data = {
 			'id': $('#id').val(),
 			'user_id': $('#user_id').val()
@@ -126,7 +129,11 @@ $(document).ready(function () {
 			url: base_url() + "schedule/approve",
 			data: _data,
 			success: function (response) {
-				console.log(response);
+				if (response.code == 0) {
+					showMessageDialog('addschedule-main-msg', response.message, 'success');
+				} else {
+					showMessageDialog('addschedule-main-msg', response.message, 'danger');
+				}
 			}
 		});
 	});
@@ -167,14 +174,12 @@ $(document).ready(function () {
 			url = base_url() + "schedule/store";
 		}
 
-		console.log(url);
-
 		$.ajax({
 			type: "POST",
 			url: url,
 			data: _data,
 			success: function (response) {
-				$('#id').val(response.id);
+				// $('#id').val(response.id);
 
 				if (response.code == 0) {
 					showMessageDialog('addschedule-main-msg', response.message, 'success');

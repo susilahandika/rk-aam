@@ -125,12 +125,12 @@ $db['default'] = array(
 );
 
 $db['hris'] = array(
-	'dsn'	=> $dsn_temp_login,
-	'hostname' => $hostname_temp_login,
-	'username' => $username_temp_login,
-	'password' => $password_temp_login,
-	'database' => $database_temp_login,
-	'dbdriver' => $dbdriver_temp_login,
+	'dsn'	=> $dsn_hris,
+	'hostname' => $hostname_hris,
+	'username' => $username_hris,
+	'password' => $password_hris,
+	'database' => $database_hris,
+	'dbdriver' => $dbdriver_hris,
 	'dbprefix' => '',
 	'pconnect' => FALSE,
 	'db_debug' => FALSE,

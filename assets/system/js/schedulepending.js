@@ -28,7 +28,7 @@ $(document).ready(function () {
         		// if (data.status == 'input') {
         		// 	return '<a href="#" class="btn btn-warning btn-flat btn-sm" id="btn-edit">Edit</a>';
         		// }
-        		return '<a href="#" class="btn btn-warning btn-flat btn-sm" id="btn-edit">Edit</a>';
+        		return '<a href="#" class="btn btn-warning btn-flat btn-sm" id="btn-edit">View</a>';
         	}
         }
     ], 

@@ -67,22 +67,34 @@ $(document).ready(function () {
             data: _data,
             dataType: "json",
             success: function (response) {
+                console.log(response['message']);
+                
                 var msg = '';
 
-                if(response['code'] != 0){
+                // if(response['code'] != 0){
                     if(response['code'] == 1062){
                         msg = 'Checklist already exists!';
                     } else{
                         msg = response['message'];
                     }
 
-                    $("#alert-msg").html('<div class="alert alert-danger">' + msg + '</div>');
-                    $("#alert-msg").show();
+                    if(response['code'] == 0){
+                        $("#msg-checklist").html('<div class="alert alert-success">' + msg + '</div>');
+                        $("#msg-checklist").show();
 
-                    setTimeout(function () {
-                    	$("#alert-msg").hide('slow');
-                    }, 5000);
-                }
+                        setTimeout(function () {
+                        	$("#msg-checklist").hide('slow');
+                        }, 5000);
+                    } else{
+                        $("#msg-checklist").html('<div class="alert alert-danger">' + msg + '</div>');
+                        $("#msg-checklist").show();
+
+                        setTimeout(function () {
+                        	$("#msg-checklist").hide('slow');
+                        }, 5000);
+                    }
+
+                // }
             }
         });
       

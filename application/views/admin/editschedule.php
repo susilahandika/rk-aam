@@ -127,8 +127,8 @@
           <div class="box-footer">
             <!-- <a class="btn btn-success btn-flat" href="schedule/create" id="btn-add">Add</a> -->
             <div class="pull-right">
-              <input type="button" class="btn btn-success btn-flat" id="btn-ok" <?php echo ($schedule[0]->status == 'approved') ? 'disabled="disabled"' : '' ?> value="OK">
-              <input type="button" class="btn btn-success btn-flat" id="btn-approve" <?php echo ($schedule[0]->status == 'approved') ? 'disabled="disabled"' : '' ?> value="Approve">
+              <input type="button" class="btn btn-success btn-flat" id="btn-ok" <?php echo ($isApproved[0]->output == 0) ? 'disabled="disabled"' : '' ?> value="OK">
+              <input type="button" class="btn btn-success btn-flat" id="btn-approve" <?php echo ($isApproved[0]->output == 0) ? 'disabled="disabled"' : '' ?> value="Approve">
             </div>
           </div>
 

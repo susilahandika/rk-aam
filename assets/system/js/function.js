@@ -113,6 +113,9 @@ function showMessageDialog(id, msg, type) {
 	$("#" + id).show();
 
 	setTimeout(function () {
-		$("#" + id).hide('slow');
+		// $("#" + id).hide('slow');
+		$("#" + id).hide('slow', function () {
+			// location.reload();
+		});
 	}, 3000);
 }

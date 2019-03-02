@@ -21,9 +21,9 @@ $(document).ready(function () {
             type: "POST",
             url: base_url() + "checklist/start",
             data: _data,
-            // dataType: "json",
             success: function (response) {
                 var msg = '';
+                // console.log(response);
 
                 if(response['error'] == 13){
                     $.each(response['message'], function (key, value) { 
@@ -32,7 +32,7 @@ $(document).ready(function () {
 
                     $("#alert-msg").html('<div class="alert alert-danger" style="width:50%; margin:auto;">' + msg + '</div>');
                     $("#alert-msg").show();
-                    // console.log(response['message']);
+                    
                 }else{
                     
                     window.location.replace(response['url']);

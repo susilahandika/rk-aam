@@ -124,6 +124,7 @@ class ScheduleController extends CI_Controller {
 		$schedule_detail = $this->schedule->getScheduleDetail($id);
 		$list_region = $this->user->getRegion();
 		$list_dept = $this->user->getDept('1000');
+		$isApproved = $this->schedule->isApproved($id, $_SESSION['nik']);
 
 		$list_regions = $this->_setSelectVal(json_decode(json_encode($list_region),true), 'id', 'region_name', '');
 		$list_depts = $this->_setSelectVal(json_decode(json_encode($list_dept),true), 'id', 'dept_name', '');
@@ -150,6 +151,7 @@ class ScheduleController extends CI_Controller {
 			'schedule_detail' => $schedule_detail,
 			'list_region' => $list_regions,
 			'list_dept' => $list_depts,
+			'isApproved' => $isApproved,
 		]);
 	}
 	
@@ -278,6 +280,11 @@ class ScheduleController extends CI_Controller {
 		$process = $this->schedule->getStoreChecklist($data);
 
 		$this->_toJson($process);
+	}
+
+	public function cekApprove()
+	{
+
 	}
 
 	public function _toJson($data)

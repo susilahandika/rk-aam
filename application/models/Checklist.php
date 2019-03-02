@@ -18,6 +18,12 @@ class Checklist extends CI_Model {
             $db_error = $this->db->error();
             if(!$res) throw new Exception();
 
+            // $this->db->set('field', 'field+1');
+            // $this->db->where('checklist_date', );
+            // $res = $this->db->update('schedule_detail');
+            // $db_error = $this->db->error();
+            // if(!$res) throw new Exception();
+
             $this->db->trans_commit();
             $db_error['message'] = 'success insert data';
             
@@ -36,6 +42,25 @@ class Checklist extends CI_Model {
         $this->db->where('store', $data['store_id']);
         $this->db->where('year', $data['year']);
         $this->db->where('month', $data['month']);
+
+        $output = $this->db->get()->result();
+
+        $db_error = $this->db->error();
+
+        if(!empty($db_error) and $db_error['code'] !=0 ){
+            return $db_error;
+        } else{
+            return $output;
+        }
+    }
+
+    public function getChecklistShedule($data)
+    {
+        $this->db->select('COUNT(*) as output');
+        $this->db->from('schedule_head as a');
+        $this->db->join('schedule_detail as b', 'a.id = b.schedule_id');
+        $this->db->where('b.store', $data['store_id']);
+        $this->db->where('b.checklist_date', $data['date']);
 
         $output = $this->db->get()->result();
 

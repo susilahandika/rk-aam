@@ -57,7 +57,7 @@ $user_id = $_SESSION['nik'];
           </a>
           <ul class="treeview-menu">
             <?php if(in_array(12, $menu)){ ?>
-              <li class="<?php echo ($child == 'schedule_pending') ? 'active' : ''; ?>"><a href="<?php echo base_url() . 'schedule/schedulepending/' . $user_id; ?>"><i class="fa fa-circle-o"></i> Schedule Pending</a></li>
+              <li class="<?php echo ($child == 'schedule_pending') ? 'active' : ''; ?>"><a href="<?php echo base_url() . 'schedule/schedulepending'; ?>"><i class="fa fa-circle-o"></i> Schedule Pending</a></li>
             <?php } ?>
 
             <?php if(in_array(13, $menu)){ ?>
