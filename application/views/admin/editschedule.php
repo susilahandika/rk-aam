@@ -33,7 +33,6 @@
           <div id="addschedule-main-msg"></div>
 
           <div class="box-body">
-          <input type="hidden" name="id" id="id" value="<?php echo $schedule[0]->id; ?>">
           <input type="hidden" name="process-schedule" id="process-schedule" value="edit">
             <div class="form-group">
               <label for="periode">Region</label>
@@ -127,6 +126,7 @@
           <div class="box-footer">
             <!-- <a class="btn btn-success btn-flat" href="schedule/create" id="btn-add">Add</a> -->
             <div class="pull-right">
+              <input type="hidden" name="id-schedule-app" id="id-schedule-app" value="<?php echo $schedule[0]->id; ?>">
               <input type="button" class="btn btn-success btn-flat" id="btn-ok" <?php echo ($isApproved[0]->output == 0) ? 'disabled="disabled"' : '' ?> value="OK">
               <input type="button" class="btn btn-success btn-flat" id="btn-approve" <?php echo ($isApproved[0]->output == 0) ? 'disabled="disabled"' : '' ?> value="Approve">
             </div>
@@ -134,6 +134,13 @@
 
         </div>
         <!-- /.Main panel -->
+
+        <div class="box">
+          <div class="box-body">
+            Approve By<hr>
+            <div id="app_by"></div>
+          </div>
+        </div>
         
       </section>
       <!-- /.content -->

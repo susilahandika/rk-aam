@@ -108,6 +108,24 @@ function getStore(id) {
 	});
 }
 
+function getMonth(id) {
+	$('#' + id).append('<option value="">Month</option>');
+	var month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+	for (let index = 0; index < month.length; index++) {
+		$('#' + id).append('<option value="' + (index + 1) + '">' + month[index] + '</option>');
+	}
+}
+
+function getYear(id) {
+	$('#' + id).append('<option value="">Year</option>');
+	var year = [2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019];
+
+	for (let index = year.length - 1; index > 0; index--) {
+		$('#' + id).append('<option value="' + year[index] + '">' + year[index] + '</option>');
+	}
+}
+
 function showMessageDialog(id, msg, type) {
 	$("#" + id).html('<div class="alert alert-' + type + '">' + msg + '</div>');
 	$("#" + id).show();
@@ -118,4 +136,12 @@ function showMessageDialog(id, msg, type) {
 			// location.reload();
 		});
 	}, 3000);
+}
+
+function lastPart(){
+	var url = $(location).attr('href').replace(/\/+$/, ''), //rtrim `/`
+	parts = url.split("/"),
+	last_part = parts[parts.length - 1];
+
+	return last_part;
 }

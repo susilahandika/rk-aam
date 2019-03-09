@@ -2,6 +2,14 @@ $(document).ready(function () {
 	// getDepartment('dept_id');
 	// getRegion('region_id');
 
+	var region_id = $('#hdn_region').val();
+	var dept_id = $('#hdn_dept').val();
+
+	$('#region_id').val(region_id);
+	$('#dept_id').val(dept_id);
+
+	getAppBy(lastPart());
+	
 	/* Datatatables */
 	var table = $('#tbl-schedule-dtl').DataTable({
 		'searching': false,
@@ -42,6 +50,7 @@ $(document).ready(function () {
 		var month = $('#month').val();
 		var year = $('#year').val();
 		var store = $('#store').val();
+		var date = new Date(checklist_date);
 
 		var _data = {
 			'region_id': region_id,
@@ -50,6 +59,12 @@ $(document).ready(function () {
 			'year': year,
 			'store': store
 		};
+
+		/* Cek if month input > month periode */
+		if ((date.getMonth() + 1) != month) {
+			showMessageDialog('modal-addschedule-msg', 'Pleace cek your checklist date', 'danger');
+			return false;
+		}
 
 		/* Cek store checklist in database */
 		if (cekStoreChecklist(_data).responseJSON.length > 0) {
@@ -120,7 +135,7 @@ $(document).ready(function () {
 		// $('#btn-ok').attr('disabled', 'disabled');
 
 		var _data = {
-			'id': $('#id').val(),
+			'id': $('#id-schedule-app').val(),
 			'user_id': $('#user_id').val()
 		};
 
@@ -131,6 +146,9 @@ $(document).ready(function () {
 			success: function (response) {
 				if (response.code == 0) {
 					showMessageDialog('addschedule-main-msg', response.message, 'success');
+					$('#btn-approve').attr('disabled', 'disabled');
+					$('#btn-ok').attr('disabled', 'disabled');
+					getAppBy(_data['id']);
 				} else {
 					showMessageDialog('addschedule-main-msg', response.message, 'danger');
 				}
@@ -179,10 +197,10 @@ $(document).ready(function () {
 			url: url,
 			data: _data,
 			success: function (response) {
-				// $('#id').val(response.id);
-
 				if (response.code == 0) {
 					showMessageDialog('addschedule-main-msg', response.message, 'success');
+					$('#id-schedule-app').val(response.id);
+					$('#btn-ok').attr('disabled', 'disabled');
 				}else{
 					showMessageDialog('addschedule-main-msg', response.message, 'danger');
 				}
@@ -263,6 +281,24 @@ $(document).ready(function () {
 					//  $('#dept_id').html('<option>asd</option>');
 					$('#' + id).append('<option value="' + value.id + '">' + value.store_name + '</option>');
 				});
+			}
+		});
+	}
+
+	function getAppBy(schedule_id){
+		$.ajax({
+			type: "POST",
+			url: base_url() + "schedule/getAppBy/" + schedule_id,
+			dataType: "JSON",
+			cache: false,
+			async :false,
+			success: function (response) {
+				var html = "";
+				$.each(response, function (i, value) { 
+					html += (i+1) + ". " + value.full_name + " - " + value.position_name + " - " + value.appdate + "<br>";			 
+				});
+
+				$('#app_by').html(html);
 			}
 		});
 	}

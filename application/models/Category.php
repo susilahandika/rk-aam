@@ -19,13 +19,13 @@ class Category extends CI_Model {
         }
     }
 
-    public function getCategoryByRegion($region_id)
+    public function getCategoryByRegion($region_id, $dept_id)
     {
         $this->db->select('a.id, a.category_name');
         $this->db->from($this->table . ' as a');
-        $this->db->where('a.region_id', $region_id);
-        $this->db->where('b.region_id', $region_id);
         $this->db->join('item_checklist as b', 'a.id = b.category_id');
+        $this->db->where('a.region_id', $region_id);
+        $this->db->where('a.dept_id', $dept_id);
         $this->db->group_by('a.id, a.category_name');
         $output = $this->db->get()->result();
 

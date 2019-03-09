@@ -39,6 +39,7 @@ class UserController extends CI_Controller {
                             'region_id' => $users_mm[0]->region_id,
                             'dept_id' => $users_mm[0]->dept_id,
                             'menu' => $users_menu[0]->menu_id,
+                            'position_id' => $users_menu[0]->position_id,
                             'logged_in' => TRUE
                         );
 
@@ -120,6 +121,27 @@ class UserController extends CI_Controller {
         $this->_toJson($process);
     }
 
+    public function saveUserStore()
+    {
+        $data = $this->input->post();
+        $insertStore = array();
+
+        $store = explode(",", $data['store_id']);
+        
+        foreach ($store as $value) {
+            $stores = array(
+                'user_id' => $data['user_id'],
+                'store_id' => $value
+            );
+
+            $insertStore[] = $stores;
+        }
+
+        $process = $this->user->saveUserStore($insertStore, $data['user_id']);
+
+        $this->_toJson($process);
+    }
+
     public function edit($id)
     {
         // $process = $this->data->getItemById($id);
@@ -189,6 +211,22 @@ class UserController extends CI_Controller {
         $process = $this->user->getStoreByRegion($data['region_id']);
 
         $this->_toJson($process);   
+    }
+
+    public function listStoreByNik()
+    {
+        $data = $this->input->post();
+        $store = array();
+
+        $process = $this->user->getStoreByNik($data['user_id']);
+
+        foreach ($process as $key => $value) {
+            $store[] = $value->store_id;
+        }
+
+        $output['msg'] = implode(",", $store);
+
+        $this->_toJson($output);  
     }
 
     public function userHrisByNik()

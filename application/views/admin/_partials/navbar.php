@@ -109,6 +109,10 @@
 
 </header>
 
+<input type="hidden" name="hdn_id" id="hdn_id" value="<?php echo $_SESSION['nik']; ?>">
+<input type="hidden" name="hdn_region" id="hdn_region" value="<?php echo $_SESSION['region_id']; ?>">
+<input type="hidden" name="hdn_dept" id="hdn_dept" value="<?php echo $_SESSION['dept_id']; ?>">
+
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog">

@@ -113,6 +113,41 @@
       </div>
     </div>
 
+    <div id="modal_store" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <!-- <h4 class="modal-title" id="modal-title">Modal Header</h4> -->
+            <div id='modal-title-store'>Edit Store</div>
+            <input type="hidden" name="" id="process-store">
+          </div>
+          <div class="modal-body">
+            <div id="modal-msg-store"></div>
+            <table class="table table-hover table-responsive">
+
+              <tr>
+                <td width="25%">NIK</td>
+                <td><input type="text" name="user_store_id" id="user_store_id" class="form-control input-sm" readonly="readonly"></td>
+              </tr>
+
+              <tr>
+                <td width="25%">Store</td>
+                <td><textarea class="form-control" name="user_store" id="user_store" cols="30" rows="10"></textarea></td>
+              </tr>
+
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success btn-flat" id="btn-save-store">Save</button>
+            <!-- <button type="button" class="btn btn-default btn-flat" data-dismiss="modal">Close</button> -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <?php $this->load->view('admin/_partials/footer') ?>
 
   </div>

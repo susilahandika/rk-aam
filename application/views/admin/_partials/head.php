@@ -11,6 +11,7 @@
 <!-- Ionicons -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/Ionicons/css/ionicons.min.css">
 <!-- DataTables -->
+<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/datatables.net/css/datatables.min.css"> -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 <!-- Select 2 -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/select2/dist/css/select2.min.css">
@@ -19,3 +20,4 @@
 <!-- AdminLTE Skins. Choose a skin from the css/skins
     folder instead of downloading all of them to reduce the load. -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/skins/_all-skins.min.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>assets/bower_components/RowGroup/css/rowGroup.bootstrap.min.css">

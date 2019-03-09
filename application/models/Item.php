@@ -35,10 +35,11 @@ class Item extends CI_Model {
         }
     }
 
-    public function getItemByCategory($category_id, $region_id)
+    public function getItemByCategory($category_id, $region_id, $dept_id)
     {
         $this->db->where('category_id', $category_id);
         $this->db->where('region_id', $region_id);
+        $this->db->where('dept_id', $dept_id);
         $output = $this->db
                     ->get($this->table)
                     ->result();

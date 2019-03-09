@@ -78,13 +78,8 @@ $user_id = $_SESSION['nik'];
           </a>
           <ul class="treeview-menu">
             <?php if(in_array(8, $menu)){ ?>
-              <li class="<?php echo ($child == 'category') ? 'active' : ''; ?>"><a href="#"><i class="fa fa-circle-o"></i> Checklist AAM</a></li>
+              <li class="<?php echo ($child == 'rchecklist') ? 'active' : ''; ?>"><a href="<?php echo base_url() . 'report/checklist'; ?>"><i class="fa fa-circle-o"></i> Checklist AAM</a></li>
             <?php } ?>
-
-            <?php if(in_array(9, $menu)){ ?>
-              <li class="<?php echo ($child == 'item') ? 'active' : ''; ?>"><a href="#"><i class="fa fa-circle-o"></i> Visit By Schedule</a></li>
-            <?php } ?>
-            
           </ul>
         </li>
       <?php } ?>

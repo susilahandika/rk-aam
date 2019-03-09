@@ -48,7 +48,7 @@ class ScheduleController extends CI_Controller {
 
 	public function select()
 	{
-		$process = $this->schedule->all();
+		$process = $this->schedule->allByRegionDept();
 
 		$this->_toJson($process);
 	}
@@ -175,7 +175,7 @@ class ScheduleController extends CI_Controller {
 		$data_approve = array(
 			'schedule_id'=> $data['id'],
 			'app_id' => $data['user_id'],
-			'app_date' => date('Y-m-d h:i:sa'),
+			'app_date' => date('Y-m-d H:i:sa'),
 		);
 
 		$process = $this->schedule->approveSchedule($data_approve);
@@ -282,9 +282,11 @@ class ScheduleController extends CI_Controller {
 		$this->_toJson($process);
 	}
 
-	public function cekApprove()
+	public function cekApproveBy($schedule_id)
 	{
-
+		$process = $this->schedule->getApproveBy($schedule_id);
+		
+		$this->_toJson($process);
 	}
 
 	public function _toJson($data)

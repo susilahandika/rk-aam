@@ -19,7 +19,7 @@ class ChecklistController extends CI_Controller {
         $this->load->library('upload');
         $this->load->library('form_validation');
 
-        if (!$this->session->logged_in) {
+        if (!$_SESSION['logged_in']) {
 			header('Location:' . base_url() . 'login/checklist');
 		}
     }
@@ -35,7 +35,6 @@ class ChecklistController extends CI_Controller {
         $data['year'] = date('Y');
         $data['month'] = date('m');
         $data['date'] = date('Y-m-d');
-        $data['dept_id'] = '2';
 
         if($this->isStoreRegion($data['store_id'], $data['region_id']) == false){
             $process['error'] = 13;
@@ -64,7 +63,7 @@ class ChecklistController extends CI_Controller {
 
     public function checklistCategory($region_id, $store_id)
     {
-        $process = $this->category->getCategoryByRegion($region_id);
+        $process = $this->category->getCategoryByRegion($region_id, $_SESSION['dept_id']);
 
         $this->load->view('checklist/checklist', [
             'data' => $process,
@@ -77,7 +76,7 @@ class ChecklistController extends CI_Controller {
 
     public function checklistItem($category_id, $region_id)
     {   
-        $process = $this->item->getItemByCategory($category_id, $region_id);
+        $process = $this->item->getItemByCategory($category_id, $region_id, $_SESSION['dept_id']);
 
         $this->load->view('checklist/checklistDetail', [
             'data' => $process
@@ -100,7 +99,7 @@ class ChecklistController extends CI_Controller {
         $checklist['head'] = array(
             'id' => $id,
             'checklist_date' => $data['checklist_date'],
-            'checklist_id' => '20190410000201287',
+            'checklist_id' =>$data['hdn_id'],
             'region_id' => $data['hdn_region'],
             'dept_id' => $data['hdn_dept'],
             'store' => $data['store'],
@@ -131,10 +130,6 @@ class ChecklistController extends CI_Controller {
         // echo "</pre>";
 
         $this->_toJson($process);
-
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
     }
 
     public function uploadImage($img_name)

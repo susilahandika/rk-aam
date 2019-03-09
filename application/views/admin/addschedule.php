@@ -113,6 +113,7 @@
 
           <div class="box-footer">
             <!-- <a class="btn btn-success btn-flat" href="schedule/create" id="btn-add">Add</a> -->
+            <input type="hidden" id="id-schedule-app" name="" value="">
             <div class="pull-right">
               <input type="button" class="btn btn-success btn-flat" id="btn-ok" value="OK">
               <input type="button" class="btn btn-success btn-flat" id="btn-approve" value="Approve">
@@ -121,6 +122,13 @@
 
         </div>
         <!-- /.Main panel -->
+
+        <div class="box">
+          <div class="box-body">
+            Approve By<hr>
+            <div id="app_by"></div>
+          </div>
+        </div>
         
       </section>
       <!-- /.content -->

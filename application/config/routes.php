@@ -71,6 +71,8 @@ $route['user/store']['POST'] = 'UserController/store';
 $route['user/edit/(:any)']['GET'] = 'UserController/edit/$1';
 $route['user/update/(:any)']['POST'] = 'UserController/update/$1';
 $route['user/find']['POST'] = 'UserController/userHrisByNik';
+$route['user/listStoreByNik']['POST'] = 'UserController/listStoreByNik';
+$route['user/saveUserStore']['POST'] = 'UserController/saveUserStore';
 
 // Routes UserMenu
 $route['usermenu'] = 'UserMenuController/index';
@@ -105,6 +107,7 @@ $route['schedule/store']['POST'] = 'ScheduleController/store';
 $route['schedule/update']['POST'] = 'ScheduleController/update';
 $route['schedule/approve']['POST'] = 'ScheduleController/approve';
 $route['schedule/cekstorechecklist']['POST'] = 'ScheduleController/cekStoreChecklist';
+$route['schedule/getAppBy/(:any)']['POST'] = 'ScheduleController/cekApproveBy/$1';
 
 /* ----- Routes Checklist ----- */
 $route['checklist'] = 'ChecklistController/index';
@@ -117,3 +120,10 @@ $route['checklist/cek_already_exist']['GET'] = 'ChecklistController/isAlreadyChe
 $route['matriksapp'] = 'MatriksappController/index';
 $route['matriksapp/getMatriks'] = 'MatriksappController/getMatriks';
 $route['matriksapp/store']['POST'] = 'MatriksappController/store';
+
+/* ----- Routes Report Checklist ----- */
+$route['report/checklist'] = 'ReportChecklistController/index';
+$route['report/checklist/selectbyaam'] = 'ReportChecklistController/checklistAmm';
+$route['report/countperstorelimit'] = 'ReportChecklistController/countPerStoreLimit';
+$route['report/countpermonthyear'] = 'ReportChecklistController/countPerMonthYear';
+$route['report/countperitem'] = 'ReportChecklistController/countPerItem';

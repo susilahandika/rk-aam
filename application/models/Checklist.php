@@ -61,6 +61,9 @@ class Checklist extends CI_Model {
         $this->db->join('schedule_detail as b', 'a.id = b.schedule_id');
         $this->db->where('b.store', $data['store_id']);
         $this->db->where('b.checklist_date', $data['date']);
+        $this->db->where('a.region_id', $data['region_id']);
+        $this->db->where('a.dept_id', $data['dept_id']);
+        $this->db->where('a.status', 'approved');
 
         $output = $this->db->get()->result();
 

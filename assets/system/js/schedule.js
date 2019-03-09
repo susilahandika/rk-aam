@@ -1,6 +1,8 @@
 $(document).ready(function () {
+
     var table = $('#example').DataTable({
         "ajax": base_url() + "schedule/select",
+        "async":false,
         "sAjaxDataProp": "",
         "columns": [
             { "data": "id" },

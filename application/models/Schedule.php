@@ -43,7 +43,7 @@ class Schedule extends CI_Model {
             $db_error = $this->db->error();
             if(!$res) throw new Exception();
 
-            $this->approveSchedule($dataHead);
+            // $this->approveSchedule($dataHead);
 
             $this->db->trans_commit();
             $db_error['message'] = 'success insert data';
@@ -115,6 +115,26 @@ class Schedule extends CI_Model {
         $this->db->from('mm_checklist.schedule_head as a');
         $this->db->join('minimart.region as b', 'a.region_id = b.id');
         $this->db->join('minimart.user as c', 'a.created_id = c.id');
+
+        $output = $this->db->get()->result();
+
+        $db_error = $this->db->error();
+
+        if(!empty($db_error) and $db_error['code'] !=0 ){
+            return $db_error;
+        } else{
+            return $output;
+        }
+    }
+
+    public function allByRegionDept()
+    {
+        $this->db->select('a.id, a.region_id, b.region_name, a.created_date, c.full_name, a.status');
+        $this->db->from('mm_checklist.schedule_head as a');
+        $this->db->join('minimart.region as b', 'a.region_id = b.id');
+        $this->db->join('minimart.user as c', 'a.created_id = c.id');
+        $this->db->where('a.region_id', $_SESSION['region_id']);
+        $this->db->where('a.dept_id', $_SESSION['dept_id']);
 
         $output = $this->db->get()->result();
 
@@ -228,6 +248,24 @@ class Schedule extends CI_Model {
     public function isApproved($schedule_id, $user_id)
     {
         $output = $this->db->query("CALL last_level_app($schedule_id, $user_id)")->result();
+
+        $db_error = $this->db->error();
+
+        if(!empty($db_error) and $db_error['code'] !=0 ){
+            return $db_error;
+        } else{
+            return $output;
+        }
+    }
+
+    public function getApproveBy($schedule_id)
+    {
+        $this->db->select('`schedule_app`.`app_id`, minimart.`user`.`full_name`, minimart.`position`.`position_name`, DATE_FORMAT(`schedule_app`.`app_date`, "%d %M %Y") as appdate');
+        $this->db->from('`schedule_app`');
+        $this->db->join('minimart.`user`', '`schedule_app`.`app_id` = `minimart`.`user`.`id`');
+        $this->db->join('minimart.`position`', 'minimart.`user`.`position_id` = minimart.`position`.`id`');
+        $this->db->where('`schedule_app`.`schedule_id`', $schedule_id);
+        $output = $this->db->get()->result();
 
         $db_error = $this->db->error();
 

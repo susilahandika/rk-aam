@@ -17,7 +17,7 @@ $(document).ready(function () {
     		{ "data": "position_name" },
     		{
     			"data": "null",
-    			"defaultContent": '<a href="" class="btn btn-warning btn-flat btn-sm" id="btn-edit">Edit</a>'
+				"defaultContent": '<a href="#" class="btn btn-warning btn-flat btn-sm" id="btn-edit">Edit</a> <a href="#" class="btn btn-warning btn-flat btn-sm" id="btn-store">Store</a>'
     		},
         ],
         "columnDefs": [
@@ -76,8 +76,8 @@ $(document).ready(function () {
 
     	$("#modal_insert").modal("toggle");
     });
-    /* ./Button add */
-
+	/* ./Button add */
+	
     /* Button save */
     $('#btn-save').click(function (e) {
     	e.preventDefault();
@@ -150,7 +150,53 @@ $(document).ready(function () {
 
     	$("#modal_insert").modal("toggle");
     });
-    /* ./Button edit */
+	/* ./Button edit */
+
+	/* Button save store */
+	$('#btn-save-store').click(function (e) { 
+		e.preventDefault();
+		
+		$data = {
+			'user_id': $('#user_store_id').val(),
+			'store_id': $('#user_store').val()
+		};
+
+		$.ajax({
+			type: "POST",
+			url: base_url() + 'user/saveUserStore',
+			data: $data,
+			dataType: "JSON",
+			success: function (response) {
+				if (response.code != 0) {
+					showMessageDialog('modal-title-store', response.message, 'danger');
+				}else{
+					$("#modal_store").modal("toggle");
+					showMessageDialog('main-msg', response.message, 'success');
+				}
+			}
+		});
+	});
+	
+	/* Button store */
+	$('#example tbody').on('click', '#btn-store', function (e) {
+		e.preventDefault();
+		var data_table = table.row($(this).parents('tr')).data();
+
+		$('#user_store_id').val(data_table.id);
+
+		$.ajax({
+			type: "POST",
+			url: base_url() + 'user/listStoreByNik',
+			data: { 'user_id': data_table.id },
+			dataType: "JSON",
+			success: function (response) {
+				$('#user_store').val(response.msg);
+			}
+		});
+
+		$("#modal_store").modal("toggle");
+	});
+    /* ./Button store */
 
     function clearForm(){
         $('#id').val('');
