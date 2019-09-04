@@ -115,6 +115,7 @@ $route['checklist/(:any)/(:any)']['GET'] = 'ChecklistController/checklistCategor
 $route['checklist/store']['POST'] = 'ChecklistController/store';
 $route['checklist/start']['POST'] = 'ChecklistController/startChecklist';
 $route['checklist/cek_already_exist']['GET'] = 'ChecklistController/isAlreadyChecklist';
+$route['checklist/checklistDone']['GET'] = 'ChecklistController/checklistDone';
 
 /* ----- Routes Matriks App ----- */
 $route['matriksapp'] = 'MatriksappController/index';
@@ -123,7 +124,13 @@ $route['matriksapp/store']['POST'] = 'MatriksappController/store';
 
 /* ----- Routes Report Checklist ----- */
 $route['report/checklist'] = 'ReportChecklistController/index';
+$route['report/detailCountOk'] = 'ReportChecklistController/detailCountOk';
+$route['report/detailCountNo'] = 'ReportChecklistController/detailCountNo';
+$route['report/detailCountNa'] = 'ReportChecklistController/detailCountNa';
 $route['report/checklist/selectbyaam'] = 'ReportChecklistController/checklistAmm';
 $route['report/countperstorelimit'] = 'ReportChecklistController/countPerStoreLimit';
 $route['report/countpermonthyear'] = 'ReportChecklistController/countPerMonthYear';
 $route['report/countperitem'] = 'ReportChecklistController/countPerItem';
+$route['report/selectdetailCountOk'] = 'ReportChecklistController/selectdetailCountOk';
+$route['report/selectdetailCountNo'] = 'ReportChecklistController/selectdetailCountNo';
+$route['report/selectdetailCountNa'] = 'ReportChecklistController/selectdetailCountNa';

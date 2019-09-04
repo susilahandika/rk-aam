@@ -11,13 +11,13 @@ $user_id = $_SESSION['nik'];
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
       <?php if(in_array(1, $menu)){ ?>
-        <li class="<?php echo ($parent == 'home') ? 'active' : ''; ?>"><a href="<?php echo base_url(); ?>home"><i class="fa fa-home"></i> <span>Home</span></a></li>
+        <li class="<?php echo ($parent == 'home') ? 'active' : ''; ?>"><a href="<?php echo base_url(); ?>home"><img src="<?php echo base_url() . 'assets/public/sidebar_img/home.png' ?>"> <span>Home</span></a></li>
       <?php } ?>
 
       <?php if(in_array(2, $menu)){ ?>
         <li class="<?php echo ($parent == 'setting') ? 'active' : ''; ?> treeview">
           <a href="#">
-            <i class="fa fa-cogs"></i> <span>Setting</span>
+          <img src="<?php echo base_url() . 'assets/public/sidebar_img/settings-icon.png' ?>"> <span>Setting</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -50,7 +50,7 @@ $user_id = $_SESSION['nik'];
       <?php if(in_array(6, $menu)){ ?>
         <li class="<?php echo ($parent == 'schedule') ? 'active' : ''; ?> treeview">
           <a href="#">
-            <i class="fa fa-files-o"></i> <span>Schedule</span>
+          <img src="<?php echo base_url() . 'assets/public/sidebar_img/schedule.png' ?>"> <span>Schedule</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -71,7 +71,7 @@ $user_id = $_SESSION['nik'];
       <?php if(in_array(7, $menu)){ ?>
         <li class="<?php echo ($parent == 'report') ? 'active' : ''; ?> treeview">
           <a href="#">
-            <i class="fa fa-files-o"></i> <span>Report</span>
+          <img src="<?php echo base_url() . 'assets/public/sidebar_img/report-icon.png' ?>" alt="Smiley face"> <span>Report</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

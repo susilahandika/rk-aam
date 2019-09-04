@@ -29,6 +29,11 @@ class ChecklistController extends CI_Controller {
         $this->load->view('checklist/home');
     }
 
+    public function checklistDone()
+    {
+        $this->load->view('checklist/checklistdone');
+    }
+
     public function startChecklist()
     {
         $data = $this->input->post();

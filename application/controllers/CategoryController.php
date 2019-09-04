@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class CategoryController extends CI_Controller {
+class CategoryController extends CI_Controller
+{
 
     private $model = 'Category';
 
@@ -26,8 +27,8 @@ class CategoryController extends CI_Controller {
         ]);
     }
 
-	public function select()
-	{
+    public function select()
+    {
         $process = $this->data->all();
 
         // echo json_encode($process); 
@@ -41,12 +42,12 @@ class CategoryController extends CI_Controller {
         // echo json_encode($process); 
         $this->_toJson($process);
     }
-    
+
     public function store()
     {
         $data = $this->input->post();
 
-        if($this->validate() == true){
+        if ($this->validate() == true) {
             $process = $this->data->insert($data);
         } else {
             $process = array(
@@ -69,7 +70,7 @@ class CategoryController extends CI_Controller {
     {
         $data = $this->input->post();
 
-        if($this->validate() == true){
+        if ($this->validate() == true) {
             $process = $this->data->update($data, $id);
         } else {
             $process = array(

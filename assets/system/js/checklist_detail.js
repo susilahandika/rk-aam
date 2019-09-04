@@ -4,6 +4,13 @@ $(document).ready(function () {
         radioClass   : 'iradio_flat-green'
     });
 
+    $(":file").filestyle({
+        buttonName: "btn-success btn-flat",
+        buttonBefore: true,
+        buttonText: "Choose Image",
+        size: "sm",
+    });
+
     $('#form-store-checklist').submit(function (e) { 
         e.preventDefault();
         
@@ -67,7 +74,6 @@ $(document).ready(function () {
             data: _data,
             dataType: "json",
             success: function (response) {
-                console.log(response);
                 
                 var msg = '';
 
@@ -78,12 +84,7 @@ $(document).ready(function () {
                 }
 
                 if(response['code'] == 0){
-                    $("#msg-checklist").html('<div class="alert alert-success">' + msg + '</div>');
-                    $("#msg-checklist").show();
-
-                    setTimeout(function () {
-                    	$("#msg-checklist").hide('slow');
-                    }, 5000);
+                    window.location.href = '../checklistDone';
                 } else{
                     $("#msg-checklist").html('<div class="alert alert-danger">' + msg + '</div>');
                     $("#msg-checklist").show();

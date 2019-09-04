@@ -12,7 +12,9 @@
   <?php if($value->need_image == 'Y'){ ?>
   <tr>
     <td colspan="5">
-      <input type="file" name="<?php echo "img_checklist" . $value->id . ""; ?>" class="form-control input-sm" id="<?php echo "img_checklist" . $value->id . ""; ?>">
+      <div class="col-sm-12">
+        <input type="file" name="<?php echo "img_checklist" . $value->id . ""; ?>" class="form-control" id="<?php echo "img_checklist" . $value->id . ""; ?>">
+      </div>
     </td>
   </tr>
   <?php } ?>

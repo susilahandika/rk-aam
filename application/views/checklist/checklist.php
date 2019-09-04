@@ -2,6 +2,12 @@
 <html>
 <head>
   <?php $this->load->view('checklist/_partials/head'); ?>
+
+  <style>
+    .inputStyle{
+      min-width: 100%;
+    }
+  </style>
 </head>
 <body>
 

@@ -22,6 +22,45 @@ class ReportChecklistController extends CI_Controller {
         ]);
     }
 
+    public function detailCountOk()
+    {
+        $data = array(
+			'parent' => 'home',
+			'child' => '',
+			'notif' => $this->user->getCountPendingApp($_SESSION['nik']),
+		);
+
+        $this->load->view('admin/detail_count_ok', [
+            'data' => $data
+        ]);
+    }
+
+    public function detailCountNo()
+    {
+        $data = array(
+			'parent' => 'home',
+			'child' => '',
+			'notif' => $this->user->getCountPendingApp($_SESSION['nik']),
+		);
+
+        $this->load->view('admin/detail_count_no', [
+            'data' => $data
+        ]);
+    }
+
+    public function detailCountNa()
+    {
+        $data = array(
+			'parent' => 'home',
+			'child' => '',
+			'notif' => $this->user->getCountPendingApp($_SESSION['nik']),
+		);
+
+        $this->load->view('admin/detail_count_na', [
+            'data' => $data
+        ]);
+    }
+
     public function checklistAmm()
     {
         $process = $this->reportchecklist->all();
@@ -46,6 +85,27 @@ class ReportChecklistController extends CI_Controller {
     public function countPerItem()
     {
         $process = $this->reportchecklist->countPerItem();
+
+        $this->_toJson($process);
+    }
+
+    public function selectdetailCountOk()
+    {
+        $process = $this->reportchecklist->detailCountOk();
+
+        $this->_toJson($process);
+    }
+
+    public function selectdetailCountNo()
+    {
+        $process = $this->reportchecklist->detailCountNo();
+
+        $this->_toJson($process);
+    }
+
+    public function selectdetailCountNa()
+    {
+        $process = $this->reportchecklist->detailCountNa();
 
         $this->_toJson($process);
     }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <?php $this->load->view('admin/_partials/head') ?>
 </head>
@@ -32,51 +33,51 @@
           <div id="addschedule-main-msg"></div>
 
           <div class="box-body">
-          <input type="hidden" name="id" id="id" value="">
+            <input type="hidden" name="id" id="id" value="">
             <div class="form-group">
               <label for="periode">Region</label>
               <!-- <select name="region_id" id="region_id" class="form-control input-sm"></select> -->
-              <?php 
-                echo form_dropdown('region_id', $list_region, null, [
-                  'class' => 'form-control input-sm',
-                  'id' => 'region_id',
-                ]); 
-                
+              <?php
+              echo form_dropdown('region_id', $list_region, null, [
+                'class' => 'form-control input-sm',
+                'id' => 'region_id',
+              ]);
+
               ?>
             </div>
 
             <div class="form-group">
               <label for="periode">Department</label>
               <!-- <select name="dept_id" id="dept_id" class="form-control input-sm"></select> -->
-              <?php 
-            
-                echo form_dropdown('dept_id', $list_dept, null, [
-                  'class' => 'form-control input-sm',
-                  'id' => 'dept_id',
-                  'placeholder' => 'Department',
-                ]); 
-                
+              <?php
+
+              echo form_dropdown('dept_id', $list_dept, null, [
+                'class' => 'form-control input-sm',
+                'id' => 'dept_id',
+                'placeholder' => 'Department',
+              ]);
+
               ?>
             </div>
 
             <div class="form-group">
               <label for="periode">Periode</label>
               <div class="input-group">
-                <?php 
-            
+                <?php
+
                 echo form_dropdown('month', $options, $monthNow, [
                   'class' => 'form-control input-sm',
                   'id' => 'month',
-                ]); 
-                
+                ]);
+
                 ?>
 
                 <span class="input-group-addon" id=""></span>
                 <input type="text" name="year" class="form-control input-sm" id="year" value="<?php echo $yearNow; ?>" readonly>
               </div>
               <hr>
-            </div>              
-            
+            </div>
+
             <!-- <form action="#" id="upload-file" enctype="multipart/form-data" method="post">
               <div class="form-group" style="padding-Bottom:10px;">
                 <div class="input-group">
@@ -125,11 +126,12 @@
 
         <div class="box">
           <div class="box-body">
-            Approve By<hr>
+            Approve By
+            <hr>
             <div id="app_by"></div>
           </div>
         </div>
-        
+
       </section>
       <!-- /.content -->
     </div>
@@ -177,11 +179,12 @@
   <!-- ./wrapper -->
 
   <?php $this->load->view('admin/_partials/js') ?>
-  <script src="<?php echo base_url();?>/assets/system/js/addschedule.js"></script>
-  <script src="<?php echo base_url();?>/assets/system/js/function.js"></script>
-  <script src="<?php echo base_url();?>/assets/system/js/link.js"></script>
-  <script src="<?php echo base_url();?>/assets/system/js/moment.js"></script>
-  <script src="<?php echo base_url();?>/assets/system/js/header.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/system/js/addschedule.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/system/js/function.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/system/js/link.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/system/js/moment.js"></script>
+  <script src="<?php echo base_url(); ?>/assets/system/js/header.js"></script>
 
 </body>
+
 </html>

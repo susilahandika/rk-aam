@@ -39,7 +39,7 @@
               <div class="icon">
                 <i class="fa fa-calendar-check-o"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="<?php echo base_url() . 'report/detailCountOk' ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -54,7 +54,7 @@
               <div class="icon">
                 <i class="fa fa-calendar-times-o" aria-hidden="true"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="<?php echo base_url() . 'report/detailCountNo' ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -69,7 +69,7 @@
               <div class="icon">
                 <i class="fa fa-calendar-minus-o"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              <a href="<?php echo base_url() . 'report/detailCountNa' ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -80,7 +80,7 @@
             <!-- DONUT CHART -->
             <div class="box box-danger">
               <div class="box-header with-border">
-                <h3 class="box-title">Donut Chart</h3>
+                <h3 class="box-title"><i class="fa fa-pie-chart" aria-hidden="true"></i> Doughnut Chart</h3>
 
                 <div class="box-tools pull-right">
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -99,7 +99,7 @@
           <div class="col-md-6">
             <div class="box box-danger">
               <div class="box-header with-border">
-                <h3 class="box-title">List Store</h3>
+                <h3 class="box-title"><i class="fa fa-list" aria-hidden="true"></i> List Store</h3>
 
                 <div class="box-tools pull-right">
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -129,7 +129,7 @@
           <div class="col-md-12">
             <div class="box box-danger">
             <div class="box-header with-border">
-                <h3 class="box-title">List Item Checklist</h3>
+                <h3 class="box-title"><i class="fa fa-list" aria-hidden="true"></i> List Item Checklist</h3>
 
                 <div class="box-tools pull-right">
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
